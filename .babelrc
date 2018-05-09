@@ -1,0 +1,22 @@
+{
+  "presets": [
+    "react",
+    "stage-0",
+    "es2015"
+  ],
+  "plugins": [
+    "transform-decorators-legacy",
+    "transform-class-properties",
+    "emotion"
+  ],
+  "env": {
+    "development": {
+      "plugins": [
+        "react-hot-loader/babel"
+      ],
+      "presets": [
+        "react-hmre"
+      ]
+    }
+  }
+}

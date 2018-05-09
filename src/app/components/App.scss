@@ -1,0 +1,26 @@
+@import '../../common/style/theme';
+
+.app {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    min-width: 1250px;
+    background-color: $grey-lightest;
+
+    .content {
+        min-height: $content-min-height;
+        background-color: $grey-lightest;
+        margin-top: $topBar-height;
+        position: relative;
+
+        .content-wrapper {
+          max-width: 1180px;
+          margin-left: auto;
+          margin-right: auto;
+        }
+    }
+}
