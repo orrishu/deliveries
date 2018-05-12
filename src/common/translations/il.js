@@ -19,6 +19,16 @@ export default {
     existing: 'קודים קיימים'
   },
   deliveries: {
-    title: 'משלוחים ממתינים'
+    title: 'משלוחים ממתינים',
+    from: 'מאת',
+    to: 'אל',
+    deliveryNote: 'תעודת משלוח',
+    name1: 'שם1',
+    name2: 'שם2',
+    date: 'תאריך',
+    description: 'תיאור',
+    combo: 'שדה1',
+    reciever1: 'מקבל',
+    collect: 'גוביינא'
   }
 }
