@@ -34,7 +34,7 @@ export default class Deliveries extends Component {
         <Jumbotron>
           <h1>{t('deliveries.title')}</h1>
           <p>
-            {t('code.test')}
+            {t('deliveries.subtitle')}
           </p>
         </Jumbotron>
         <Grid styleName="show-grid">

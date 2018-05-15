@@ -1,5 +1,7 @@
 import { action, computed, observable, toJS } from 'mobx'
 import { getCodes, addNewCode } from 'common/services/apiService'
+import find from 'lodash/find'
+import remove from 'lodash/remove'
 
 class Code {
   @observable resultsLoading = false
@@ -55,6 +57,22 @@ class Code {
 
       if (codeError == null) {
         console.info('[addCode]')
+        //this may be the preliminary action
+        const found = find(this.codes, item => {
+          return item.code == code
+        })
+
+        if (found) {
+          //increment count only
+          found.count = ++found.count
+          remove(this.codes, item => {
+            return item.code == code
+          })
+          this.codes.push(found)
+        }
+        else {
+          this.codes.push({id: -1, code, count: 1})
+        }
       }
       else {
         console.error(toJS(codeError))

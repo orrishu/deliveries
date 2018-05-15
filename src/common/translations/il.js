@@ -1,7 +1,7 @@
 export default {
   page404: 'מצטערים, הקישור שגוי',
   loading: 'טוען...',
-  AppTitle: 'משלוחים',
+  AppTitle: 'בלדר',
   loginPage: {
     usernameLabel: 'שם משתמש',
     passwordLabel: 'סיסמה',
@@ -9,17 +9,19 @@ export default {
     loginError: 'פרטי ההזדהות שהזנת שגויים, אנא נסה שנית.'
   },
   nav: {
-    code: 'הזנת קוד',
+    code: 'מחסן',
     deliveries: 'משלוחים'
   },
   code: {
-    title: 'הזנת קוד',
-    test: 'קצת טקסט לניסיון. ',
-    add: 'אנא הזן קוד חדש',
-    existing: 'קודים קיימים'
+    title: 'מחסן',
+    subtitle: 'הזנת קוד חדש או קיים',
+    add: 'אנא הזן קוד חדש או קיים',
+    existing: 'קודים קיימים',
+    saveChanges: 'שמור שינויים'
   },
   deliveries: {
     title: 'משלוחים ממתינים',
+    subtitle: 'צפייה ושיוך של משלוח לשליחים',
     from: 'מאת',
     to: 'אל',
     deliveryNote: 'תעודת משלוח',

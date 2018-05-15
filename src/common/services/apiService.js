@@ -84,7 +84,7 @@ export function createUrl(relUrl, searchParams = {}, isApi = true) {
 export async function getCodes() {
   return Promise.resolve(
     [
-      {id: 1, code: 'ADCFERS12444'}, {id: 2, code: 'CD2FASDLL2D'}, {id: 3, code: 'AWWEFA112DA'}
+      {id: 1, code: 'ADCFERS12444', count: 1}, {id: 2, code: 'CD2FASDLL2D', count: 9}, {id: 3, code: 'AWWEFA112DA', count: 11}
     ]
   )
   //return apiFetch('Tender/GetTop5', {searchParams: {InstalledProducID: id}})
