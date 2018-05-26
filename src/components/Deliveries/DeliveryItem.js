@@ -33,25 +33,25 @@ export default class DeliveryItem extends Component {
       <div>
         <Row className="show-grid" onClick={this.openBig}>
           <Col xs={1} md={1}>
-            <code>{`#${delivery.id}`}</code>
+            <code>{`#${delivery.Id}`}</code>
           </Col>
           <Col xs={2} md={2}>
-            <code>{delivery.receivedAt}</code>
+            <code>{delivery.ReceivedAt}</code>
           </Col>
           <Col xs={2} md={2}>
-            <code>{delivery.fromAddress}</code>
+            <code>{delivery.FromAddress}</code>
           </Col>
           <Col xs={2} md={2}>
-            <code>{delivery.toAddress}</code>
+            <code>{delivery.ToAddress}</code>
           </Col>
           <Col xs={2} md={2}>
-            <code>{delivery.importance}</code>
+            <code>{delivery.Importance}</code>
           </Col>
           <Col xs={2} md={2}>
-            <code>{delivery.courierDelivered}</code>
+            <code>{delivery.CourierDelivered}</code>
           </Col>
           <Col xs={1} md={1}>
-            <code>{delivery.status}</code>
+            <code>{delivery.Status}</code>
           </Col>
           {/*<Col xs={6} md={3} style={{paddingBottom: '8px'}}>
             <code style={{padding: 0}}>{
@@ -73,18 +73,18 @@ export default class DeliveryItem extends Component {
           <Col xs={12} md={12}>
             <Row>
               <Col xs={6} md={6}>
-                <div>{t('deliveries.from')}: {delivery.from}</div>
-                <div>{t('deliveries.to')}: {delivery.to}</div>
-                <div>{t('deliveries.deliveryNote')}: {delivery.deliveryNote}</div>
-                <div>{t('deliveries.name1')}: {delivery.name1}</div>
-                <div>{t('deliveries.name2')}: {delivery.name2}</div>
+                <div>{t('deliveries.from')}: {delivery.From}</div>
+                <div>{t('deliveries.to')}: {delivery.To}</div>
+                <div>{t('deliveries.deliveryNote')}: {delivery.DeliveryNote}</div>
+                <div>{t('deliveries.name1')}: {delivery.Name1}</div>
+                <div>{t('deliveries.name2')}: {delivery.Name2}</div>
               </Col>
               <Col xs={6} md={6}>
-                <div>{t('deliveries.date')}: {delivery.date}</div>
-                <div>{t('deliveries.description')}: {delivery.description}</div>
-                <div>{t('deliveries.combo')}: {delivery.combo1}</div>
-                <div>{t('deliveries.reciever1')}: {delivery.reciever1}</div>
-                <div>{t('deliveries.collect')}: {delivery.collect}</div>
+                <div>{t('deliveries.date')}: {delivery.Date}</div>
+                <div>{t('deliveries.description')}: {delivery.Description}</div>
+                <div>{t('deliveries.combo')}: {delivery.Combo1}</div>
+                <div>{t('deliveries.reciever1')}: {delivery.Reciever1}</div>
+                <div>{t('deliveries.collect')}: {delivery.Collect}</div>
               </Col>
             </Row>
           </Col>

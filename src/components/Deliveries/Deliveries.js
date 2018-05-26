@@ -38,6 +38,44 @@ export default class Deliveries extends Component {
           </p>
         </Jumbotron>
         <Grid styleName="show-grid">
+          <Row className="show-grid" onClick={this.openBig}>
+            <Col xs={1} md={1}>
+              <code>{t('deliveries.id')}</code>
+            </Col>
+            <Col xs={2} md={2}>
+              <code>{t('deliveries.receivedAt')}</code>
+            </Col>
+            <Col xs={2} md={2}>
+              <code>{t('deliveries.fromAddress')}</code>
+            </Col>
+            <Col xs={2} md={2}>
+              <code>{t('deliveries.toAddress')}</code>
+            </Col>
+            <Col xs={2} md={2}>
+              <code>{t('deliveries.importance')}</code>
+            </Col>
+            <Col xs={2} md={2}>
+              <code>{t('deliveries.courierDelivered')}</code>
+            </Col>
+            <Col xs={1} md={1}>
+              <code>{t('deliveries.status')}</code>
+            </Col>
+            {/*<Col xs={6} md={3} style={{paddingBottom: '8px'}}>
+              <code style={{padding: 0}}>{
+                <DropdownButton
+                  bsStyle="default"
+                  bsSize="xsmall"
+                  title="choose"
+                  id={`dropdown-basic-${ix}`}
+                >
+                  {
+                    employees.map((employee, index) =>
+                      <MenuItem key={index} eventKey={index} onClick={() => this.onClick(employee.id)}>{employee.name}</MenuItem>, this)
+                  }
+                </DropdownButton>
+              }</code>
+            </Col>*/}
+          </Row>
           {
             deliveriesStore.deliveries.map((delivery, index) =>
               <DeliveryItem

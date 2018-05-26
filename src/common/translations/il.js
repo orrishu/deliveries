@@ -20,8 +20,10 @@ export default {
     saveChanges: 'שמור שינויים'
   },
   deliveries: {
+    id: '#',
     title: 'משלוחים ממתינים',
     subtitle: 'צפייה ושיוך של משלוח לשליחים',
+    receivedAt: 'תאריך קבלה',
     from: 'מאת',
     to: 'אל',
     deliveryNote: 'תעודת משלוח',
@@ -31,6 +33,11 @@ export default {
     description: 'תיאור',
     combo: 'שדה1',
     reciever1: 'מקבל',
-    collect: 'גוביינא'
+    collect: 'גוביינא',
+    fromAddress: 'כתובת שולחת',
+    toAddress: 'כתובת יעד',
+    importance: 'דחיפות',
+    courierDelivered: 'שליח מוסר',
+    status: 'סטטוס'
   }
 }

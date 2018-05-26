@@ -5,8 +5,8 @@ import cache from 'common/utils/cache'
 //let apiBaseUrl
 //let baseUrl
 //if (process.env.NODE_ENV === 'development' || location.href.indexOf('iis-test/') > -1) {
-const apiBaseUrl = 'http://192.118.60.25/TendersSiteApi/api'
-const baseUrl = 'http://192.118.60.25/TendersSiteApi'
+const apiBaseUrl = 'http://localhost:8020/Data/api'
+const baseUrl = 'http://localhost:8020/Data'
 //}
 //else {
 //  apiBaseUrl = 'http://www.tenders.co.il/Data/api'
@@ -95,7 +95,7 @@ export function addNewCode(code) {
 }
 
 export async function getDeliveries() {
-  return Promise.resolve(
+  /*return Promise.resolve(
     [
       //{id: 1, title: 'delivery', address: 'Tel Aviv'}, {id: 2, title: 'delivery2', address: 'Jerusalem'}, {id: 3, title: 'delivery3', address: 'Haifa'}
       {
@@ -149,8 +149,8 @@ export async function getDeliveries() {
     	  endTime: '12:47'
       }
     ]
-  )
-  //return apiFetch('Tender/GetTop5', {searchParams: {InstalledProducID: id}})
+  )*/
+  return apiFetch('Deliveries/GetDeliveries') //, {searchParams: {InstalledProducID: id}})
 }
 
 export async function getEmployees() {
