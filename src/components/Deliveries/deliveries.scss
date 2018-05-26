@@ -2,8 +2,24 @@
 .show-grid [class^=col-] {
     padding-top: 10px;
     padding-bottom: 10px;
-    background-color: #eee;
-    background-color: rgba(86,61,124,.15);
+    /*background-color: #eee;
+    background-color: rgba(86,61,124,.15);*/
     border: 1px solid #ddd;
-    border: 1px solid rgba(86,61,124,.2);
+    border: 1px solid rgba(182, 159, 216, 0.2); /*rgba(86,61,124,.2);*/
+}
+
+.head-row {
+  background-color: #fff0f0;
+}
+
+.row {
+  /*background-color: #eee;*/
+  background-color: rgba(201, 190, 218, 0.15);
+  cursor: pointer;
+}
+
+.alt-row {
+  /*background-color: #eee;*/
+  background-color: rgba(161, 135, 226, 0.13);
+  cursor: pointer;
 }

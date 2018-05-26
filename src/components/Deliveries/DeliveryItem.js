@@ -29,32 +29,33 @@ export default class DeliveryItem extends Component {
   render() {
     const {delivery, ix, employees, t} = this.props
     const show = this.isOpen ? {} : {display: 'none'}
+    const style = ix % 2 == 0 ? 'row' : 'alt-row'
     return (
       <div>
-        <Row className="show-grid" onClick={this.openBig}>
+        <Row className="show-grid" styleName={style} onClick={this.openBig}>
           <Col xs={1} md={1}>
-            <code>{`#${delivery.Id}`}</code>
+            <div>{`#${delivery.Id}`}</div>
           </Col>
           <Col xs={2} md={2}>
-            <code>{delivery.ReceivedAt}</code>
+            <div style={{direction: 'ltr'}}>{delivery.ReceivedAt}</div>
           </Col>
           <Col xs={2} md={2}>
-            <code>{delivery.FromAddress}</code>
+            <div>{delivery.FromAddress}</div>
           </Col>
           <Col xs={2} md={2}>
-            <code>{delivery.ToAddress}</code>
+            <div>{delivery.ToAddress}</div>
           </Col>
           <Col xs={2} md={2}>
-            <code>{delivery.Importance}</code>
+            <div>{delivery.Importance}</div>
           </Col>
           <Col xs={2} md={2}>
-            <code>{delivery.CourierDelivered}</code>
+            <div>{delivery.CourierDelivered}</div>
           </Col>
           <Col xs={1} md={1}>
-            <code>{delivery.Status}</code>
+            <div>{delivery.Status}</div>
           </Col>
           {/*<Col xs={6} md={3} style={{paddingBottom: '8px'}}>
-            <code style={{padding: 0}}>{
+            <div style={{padding: 0}}>{
               <DropdownButton
                 bsStyle="default"
                 bsSize="xsmall"
@@ -66,13 +67,13 @@ export default class DeliveryItem extends Component {
                     <MenuItem key={index} eventKey={index} onClick={() => this.onClick(employee.id)}>{employee.name}</MenuItem>, this)
                 }
               </DropdownButton>
-            }</code>
+            }</div>
           </Col>*/}
         </Row>
         <Row className="show-grid" style={show}>
           <Col xs={12} md={12}>
             <Row>
-              <Col xs={6} md={6}>
+              <Col xs={6} md={6} style={{lineHeight: '2'}}>
                 <div>{t('deliveries.from')}: {delivery.From}</div>
                 <div>{t('deliveries.to')}: {delivery.To}</div>
                 <div>{t('deliveries.deliveryNote')}: {delivery.DeliveryNote}</div>

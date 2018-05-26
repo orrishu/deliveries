@@ -38,27 +38,27 @@ export default class Deliveries extends Component {
           </p>
         </Jumbotron>
         <Grid styleName="show-grid">
-          <Row className="show-grid" onClick={this.openBig}>
+          <Row className="show-grid" styleName="head-row" onClick={this.openBig}>
             <Col xs={1} md={1}>
-              <code>{t('deliveries.id')}</code>
+              <div>{t('deliveries.id')}</div>
             </Col>
             <Col xs={2} md={2}>
-              <code>{t('deliveries.receivedAt')}</code>
+              <div>{t('deliveries.receivedAt')}</div>
             </Col>
             <Col xs={2} md={2}>
-              <code>{t('deliveries.fromAddress')}</code>
+              <div>{t('deliveries.fromAddress')}</div>
             </Col>
             <Col xs={2} md={2}>
-              <code>{t('deliveries.toAddress')}</code>
+              <div>{t('deliveries.toAddress')}</div>
             </Col>
             <Col xs={2} md={2}>
-              <code>{t('deliveries.importance')}</code>
+              <div>{t('deliveries.importance')}</div>
             </Col>
             <Col xs={2} md={2}>
-              <code>{t('deliveries.courierDelivered')}</code>
+              <div>{t('deliveries.courierDelivered')}</div>
             </Col>
             <Col xs={1} md={1}>
-              <code>{t('deliveries.status')}</code>
+              <div>{t('deliveries.status')}</div>
             </Col>
             {/*<Col xs={6} md={3} style={{paddingBottom: '8px'}}>
               <code style={{padding: 0}}>{
