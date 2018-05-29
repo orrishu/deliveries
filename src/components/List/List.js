@@ -29,6 +29,7 @@ export default class List extends React.Component {
         key={index}
         delivery={item}
         ix={index}
+        employees={toJS(store.employees)}
       />
     )
 

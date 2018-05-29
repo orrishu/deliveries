@@ -95,61 +95,6 @@ export function addNewCode(code) {
 }
 
 export async function getDeliveries(page, pageSize) {
-  /*return Promise.resolve(
-    [
-      //{id: 1, title: 'delivery', address: 'Tel Aviv'}, {id: 2, title: 'delivery2', address: 'Jerusalem'}, {id: 3, title: 'delivery3', address: 'Haifa'}
-      {
-        id: 1,
-    	  from: 'קורקט מתנות',
-    	  to: 'רקמות נייטיב',
-    	  deliveryNote: 'Aa1234',
-    	  description: 'תיק גב סמסונייט',
-    	  name1: 'אפרת',
-    	  name2: 'אבשלום',
-    	  combo1: '',
-    	  combo2: 'מעטפה-',
-    	  combo3: '',
-    	  reciever1: '',
-    	  collect: '500',
-    	  date: '26/04/2018',
-    	  receivedAt: '11:47',
-    	  customerName: 'רקמות נייטיב',
-    	  fromAddress: 'ניר אליהו',
-    	  toAddress: 'הנגר 10 חולון',
-    	  importance: 'רגיל',
-    	  field1: 'לא',
-    	  courierCollected: 'דורון',
-    	  courierDelivered: 'אבשלום',
-    	  status: 'הועבר',
-    	  endTime: '11:47'
-      },
-      {
-        id: 2,
-    	  from: 'שימי מתנות',
-    	  to: 'רקמות משה',
-    	  deliveryNote: 'Aa12345',
-    	  description: 'תיק גב 22',
-    	  name1: 'נילי',
-    	  name2: 'אליהו',
-    	  combo1: '',
-    	  combo2: 'מעטפה-',
-    	  combo3: '',
-    	  reciever1: '',
-    	  collect: '600',
-    	  date: '27/04/2018',
-    	  receivedAt: '12:47',
-    	  customerName: 'רקמות משה',
-    	  fromAddress: 'ניר אליהו',
-    	  toAddress: 'הנגר 110 חולון',
-    	  importance: 'דחוף',
-    	  field1: 'לא',
-    	  courierCollected: 'שימי',
-    	  courierDelivered: 'דוד',
-    	  status: 'הועבר',
-    	  endTime: '12:47'
-      }
-    ]
-  )*/
   return apiFetch('Deliveries/GetDeliveries',
     {searchParams: {page, pageSize}}).then(res => {
     return {
@@ -161,10 +106,10 @@ export async function getDeliveries(page, pageSize) {
 }
 
 export async function getEmployees() {
-  return Promise.resolve(
+  /*return Promise.resolve(
     [
       {id: 1, name: 'Moses'}, {id: 2, name: 'Shimmi'}, {id: 3, name: 'David'}
     ]
-  )
-  //return apiFetch('Tender/GetTop5', {searchParams: {InstalledProducID: id}})
+  )*/
+  return apiFetch('Deliveries/GetEmployees') //, {searchParams: {InstalledProducID: id}})
 }

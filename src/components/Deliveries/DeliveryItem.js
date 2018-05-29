@@ -4,6 +4,7 @@ import {translate} from 'react-polyglot'
 import {inject, observer} from 'mobx-react'
 import {observable, toJS} from 'mobx'
 import {Grid, Row, Col, DropdownButton, MenuItem} from 'react-bootstrap'
+import Select from 'react-select'
 import CSSModules from 'react-css-modules'
 import styles from './deliveries.scss'
 
@@ -21,9 +22,28 @@ export default class DeliveryItem extends Component {
   }
 
   @observable isOpen = false
+  @observable selectedReceiver = null
+  @observable selectedCollector = null
 
   openBig = () => {
     this.isOpen = !this.isOpen
+  }
+
+  onChange = (value, type) => {
+    console.log(value, type)
+    if (type == 'recieve') {
+      this.selectedReceiver = value
+    }
+    else {
+      this.selectedCollector = value
+    }
+  }
+
+  onInputKeyDown = (e) => {
+    if (e.keyCode === 13) {
+      //e.preventDefault()  //fucks up the search.
+      e.stopPropagation()
+    }
   }
 
   render() {
@@ -39,17 +59,58 @@ export default class DeliveryItem extends Component {
           <Col xs={2} md={2}>
             <div style={{direction: 'ltr'}}>{delivery.ReceivedAt}</div>
           </Col>
-          <Col xs={2} md={2}>
+          <Col xs={1} md={1}>
             <div>{delivery.FromAddress}</div>
           </Col>
           <Col xs={2} md={2}>
             <div>{delivery.ToAddress}</div>
           </Col>
-          <Col xs={2} md={2}>
+          <Col xs={1} md={1}>
             <div>{delivery.Importance}</div>
           </Col>
           <Col xs={2} md={2}>
-            <div>{delivery.CourierDelivered}</div>
+            <div>
+              <Select
+                className="search-select"
+                menuContainerStyle={{overflowY: 'visible', height: '200px'}}
+                name="employeeReceived"
+                placeholder={t('deliveries.placeHolder')}
+                noResultsText={null}
+                searchPromptText=""
+                rtl={true}
+                multi={false}
+                cache={false}
+                clearable={false}
+                options={toJS(employees)}
+                onChange={value => this.onChange(value, 'recieve')}
+                onInputKeyDown={this.onInputKeyDown}
+                value={this.selectedReceiver}
+                labelKey={'EmployeeName'}
+                valueKey={'EmployeeID'}
+              />
+            </div>
+          </Col>
+          <Col xs={2} md={2}>
+            <div>
+              <Select
+                className="search-select"
+                menuContainerStyle={{overflowY: 'visible', height: '200px'}}
+                name="employeeCollected"
+                placeholder={t('deliveries.placeHolder')}
+                noResultsText={null}
+                searchPromptText=""
+                rtl={true}
+                multi={false}
+                cache={false}
+                clearable={false}
+                options={toJS(employees)}
+                onChange={value => this.onChange(value, 'collect')}
+                onInputKeyDown={this.onInputKeyDown}
+                value={this.selectedCollector}
+                labelKey={'EmployeeName'}
+                valueKey={'EmployeeID'}
+              />
+            </div>
           </Col>
           <Col xs={1} md={1}>
             <div>{delivery.Status}</div>
@@ -80,7 +141,7 @@ export default class DeliveryItem extends Component {
                 <div>{t('deliveries.name1')}: {delivery.Name1}</div>
                 <div>{t('deliveries.name2')}: {delivery.Name2}</div>
               </Col>
-              <Col xs={6} md={6}>
+              <Col xs={6} md={6} style={{lineHeight: '2'}}>
                 <div>{t('deliveries.date')}: {delivery.Date}</div>
                 <div>{t('deliveries.description')}: {delivery.Description}</div>
                 <div>{t('deliveries.combo')}: {delivery.Combo1}</div>

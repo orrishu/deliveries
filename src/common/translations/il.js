@@ -23,7 +23,7 @@ export default {
     id: '#',
     title: 'משלוחים ממתינים',
     subtitle: 'צפייה ושיוך של משלוח לשליחים',
-    receivedAt: 'תאריך קבלה',
+    receivedAt: 'התקבל ב',
     from: 'מאת',
     to: 'אל',
     deliveryNote: 'תעודת משלוח',
@@ -34,10 +34,12 @@ export default {
     combo: 'שדה1',
     reciever1: 'מקבל',
     collect: 'גוביינא',
-    fromAddress: 'כתובת שולחת',
-    toAddress: 'כתובת יעד',
+    fromAddress: 'מוצא',
+    toAddress: 'יעד',
     importance: 'דחיפות',
     courierDelivered: 'שליח מוסר',
-    status: 'סטטוס'
+    courierCollected: 'שליח מקבל',
+    status: 'סטטוס',
+    placeHolder: 'חפש עובד'
   }
 }

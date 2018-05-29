@@ -4,7 +4,6 @@ import { history } from 'stores/routingStore'
 import { Router } from 'react-router'
 import { I18n } from 'react-polyglot'
 import { inject, observer } from 'mobx-react'
-import '../global.scss'
 
 @inject('translationsStore')
 @observer
