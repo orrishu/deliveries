@@ -9,6 +9,10 @@ class Deliveries {
   @observable empLoading = false
   @observable empData = {};
   @observable employees = []
+  @observable hasMoreResults = true
+  @observable lastResultsPage = 0
+  @observable resultsPageSize = 10
+  @observable resultsCount = 0
   //@observable addingCode = false
   //@observable add = {};
 
@@ -16,8 +20,13 @@ class Deliveries {
   async loadDeliveries() {
     if (!this.resultsLoading) {
       this.resultsLoading = true
+      this.searchError = null
+
+      const page = this.lastResultsPage + 1
+      const pageSize = this.resultsPageSize
+
       try {
-        this.request = await getDeliveries()
+        this.request = await getDeliveries(page, pageSize)
       }
       catch(e) {
         //an error occured on search
@@ -28,13 +37,21 @@ class Deliveries {
       }
 
       if (this.searchError == null) {
-        console.info('[loadDeliveries]')
-        const data = this.request
-        this.deliveries = [...data.map(d => ({ ...d, key: d.Id }))]
+
+        const { data, total } = this.request
+        if (data.length > 0) {
+          this.lastResultsPage++
+        }
+        console.info('[loadDeliveries]', this.lastResultsPage)
+        this.deliveries = [...this.deliveries, ...data.map(d => ({ ...d, key: d.Id }))]
+        this.resultsCount = total
+        this.hasMoreResults = data.length > 0 && this.deliveries.length < this.resultsCount
       }
       else {
         console.error(toJS(this.searchError))
         this.deliveries = []
+        this.resultsCount = 0
+        this.hasMoreResults = false
       }
       this.resultsLoading = false
     }

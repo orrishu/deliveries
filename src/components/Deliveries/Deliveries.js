@@ -3,8 +3,8 @@ import {getData} from 'common/services/apiService'
 import {translate} from 'react-polyglot'
 import {inject, observer} from 'mobx-react'
 import {observable, toJS} from 'mobx'
-import {Jumbotron, Grid, Row, Col, DropdownButton, MenuItem} from 'react-bootstrap'
-import DeliveryItem from './DeliveryItem'
+import {Jumbotron, Grid, Row, Col} from 'react-bootstrap'
+import List from 'components/List'
 import CSSModules from 'react-css-modules'
 import styles from './deliveries.scss'
 
@@ -38,7 +38,7 @@ export default class Deliveries extends Component {
           </p>
         </Jumbotron>
         <Grid styleName="show-grid">
-          <Row className="show-grid" styleName="head-row" onClick={this.openBig}>
+          <Row className="show-grid" styleName="head-row">
             <Col xs={1} md={1}>
               <div>{t('deliveries.id')}</div>
             </Col>
@@ -60,32 +60,13 @@ export default class Deliveries extends Component {
             <Col xs={1} md={1}>
               <div>{t('deliveries.status')}</div>
             </Col>
-            {/*<Col xs={6} md={3} style={{paddingBottom: '8px'}}>
-              <code style={{padding: 0}}>{
-                <DropdownButton
-                  bsStyle="default"
-                  bsSize="xsmall"
-                  title="choose"
-                  id={`dropdown-basic-${ix}`}
-                >
-                  {
-                    employees.map((employee, index) =>
-                      <MenuItem key={index} eventKey={index} onClick={() => this.onClick(employee.id)}>{employee.name}</MenuItem>, this)
-                  }
-                </DropdownButton>
-              }</code>
-            </Col>*/}
           </Row>
-          {
-            deliveriesStore.deliveries.map((delivery, index) =>
-              <DeliveryItem
-                key={index}
-                delivery={delivery}
-                ix={index}
-                employees={toJS(deliveriesStore.employees)}
-              />
-            )
-          }
+          <div>
+            <List
+              store={deliveriesStore}
+              loadMore={deliveriesStore.loadDeliveries}
+            />
+          </div>
         </Grid>
       </div>
     )

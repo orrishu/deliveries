@@ -94,7 +94,7 @@ export function addNewCode(code) {
   return Promise.resolve([])
 }
 
-export async function getDeliveries() {
+export async function getDeliveries(page, pageSize) {
   /*return Promise.resolve(
     [
       //{id: 1, title: 'delivery', address: 'Tel Aviv'}, {id: 2, title: 'delivery2', address: 'Jerusalem'}, {id: 3, title: 'delivery3', address: 'Haifa'}
@@ -150,7 +150,14 @@ export async function getDeliveries() {
       }
     ]
   )*/
-  return apiFetch('Deliveries/GetDeliveries') //, {searchParams: {InstalledProducID: id}})
+  return apiFetch('Deliveries/GetDeliveries',
+    {searchParams: {page, pageSize}}).then(res => {
+    return {
+      total: res.info.count,
+      page: res.info.page,
+      data: res.data
+    }
+  })
 }
 
 export async function getEmployees() {
