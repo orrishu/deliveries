@@ -84,7 +84,7 @@ module.exports = {
         loaders: ['babel-loader'],
         include: paths.src
       },*/ {
-        test: /\.yaml$/,        
+        test: /\.yaml$/,
         use: [
           {
             loader: 'yaml-loader'
@@ -93,7 +93,7 @@ module.exports = {
         include: paths.src
       },
       {
-        test: /\.(png|gif|jpg|jpeg|eot|otf|woff|ttf|svg)?$/,
+        test: /\.(png|gif|jpg|jpeg|eot|otf|woff|woff2|ttf|svg)?$/,
         loaders: ['url-loader'],
         include: paths.src
       }
@@ -130,7 +130,7 @@ function getEntryPoints() {
     : [
       'babel-polyfill',
       paths.appEntry
-    ]    
+    ]
 }
 
 function getPlugins() {

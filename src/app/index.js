@@ -7,6 +7,8 @@ import { Provider } from 'mobx-react'
 import * as stores from 'stores'
 import './global.scss'
 import 'react-select/dist/react-select.css'
+import 'common/style/css/bootstrap.min.css'
+import 'common/style/css/bootstrap-rtl.css'
 
 function mount() {
   const App = require('./components/App').default
