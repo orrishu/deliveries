@@ -17,21 +17,23 @@ export default class List extends React.Component {
 
   static propTypes = {
     store: object,
-    loadMore: func
+    loadMore: func,
+    onFilter: func
   }
 
   render() {
     const { t, store, loadMore } = this.props
     const { resultsPageSize, resultsLoading, deliveries, hasMoreResults } = store
     //console.log('hasMoreResults', hasMoreResults)
-    const items = deliveries.map((item, index) =>
-      <DeliveryItem
+    const items = deliveries.map((item, index) => {
+      return <DeliveryItem
         key={index}
         delivery={item}
         ix={index}
         employees={toJS(store.employees)}
+        onFilter={this.props.onFilter}
       />
-    )
+    }, this)
 
     return (
       <InfiniteScroll

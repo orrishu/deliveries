@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import { array, object, number } from 'prop-types'
+import { array, object, number, func } from 'prop-types'
 import {translate} from 'react-polyglot'
 import {inject, observer} from 'mobx-react'
 import {observable, toJS} from 'mobx'
@@ -18,7 +18,8 @@ export default class DeliveryItem extends Component {
   static propTypes = {
     delivery: object,
     ix: number,
-    employees: array
+    employees: array,
+    onFilter: func
   }
 
   @observable isOpen = false
@@ -46,6 +47,10 @@ export default class DeliveryItem extends Component {
     }
   }
 
+  onDblClick = (type, id) => {
+    this.props.onFilter(type, id)
+  }
+
   render() {
     const {delivery, ix, employees, t} = this.props
     const show = this.isOpen ? {} : {display: 'none'}
@@ -62,7 +67,7 @@ export default class DeliveryItem extends Component {
           <Col xs={1} md={1} onClick={this.openBig}>
             <div>{delivery.FromAddress}</div>
           </Col>
-          <Col xs={2} md={2} onClick={this.openBig}>
+          <Col xs={2} md={2} onDoubleClick={() => this.onDblClick(delivery.ToAddress, 11)}>
             <div>{delivery.ToAddress}</div>
           </Col>
           <Col xs={1} md={1} onClick={this.openBig}>

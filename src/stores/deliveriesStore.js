@@ -3,9 +3,14 @@ import { getDeliveries, getEmployees } from 'common/services/apiService'
 
 class Deliveries {
   @observable resultsLoading = false
+  @observable filtersLoading = false
   @observable request = {};
+  @observable requestFilters = {};
   @observable deliveries = []
+  @observable filters = []; //chosen filters from filters component
+  @observable availableFilters = [];  //all relevant filters;
   @observable searchError = null
+  @observable filtersError = null
   @observable empLoading = false
   @observable empData = {};
   @observable employees = []
@@ -15,6 +20,23 @@ class Deliveries {
   @observable resultsCount = 0
   //@observable addingCode = false
   //@observable add = {};
+
+  @computed
+  get serializedFilters() {
+    const filters = toJS(this.filters)
+    return filters
+  }
+
+  @action.bound
+  applyFilters(queryFilters) {
+    const filters = JSON.parse(decodeURIComponent(queryFilters))
+    if (isObject(filters)) {
+      this.filters.replace(filters)
+    } else {
+      //implement error handle
+      console.error('[deliveriesStore]applyFilters', 'could not load filters from query')
+    }
+  }
 
   @action.bound
   async loadDeliveries() {

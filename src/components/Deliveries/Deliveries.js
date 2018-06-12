@@ -22,8 +22,8 @@ export default class Deliveries extends Component {
     deliveriesStore.loadEmployees()
   }
 
-  onClick = (id) => {
-    console.log('id', id)
+  onFilter = (type, id) => {
+    console.log(type, id)
   }
 
   render() {
@@ -68,6 +68,7 @@ export default class Deliveries extends Component {
             <List
               store={deliveriesStore}
               loadMore={deliveriesStore.loadDeliveries}
+              onFilter={this.onFilter}
             />
           </div>
         </Grid>
