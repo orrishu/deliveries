@@ -1,4 +1,5 @@
 import { action, computed, observable, toJS } from 'mobx'
+import isObject from 'lodash/isObject'
 import { getDeliveries, getEmployees } from 'common/services/apiService'
 
 class Deliveries {
@@ -39,6 +40,15 @@ class Deliveries {
   }
 
   @action.bound
+  clearResults() {
+    this.deliveries.clear()
+    this.searchError = null
+    this.lastResultsPage = 0
+    this.hasMoreResults = true
+    this.resultsCount = 0
+  }
+
+  @action.bound
   async loadDeliveries() {
     if (!this.resultsLoading) {
       this.resultsLoading = true
@@ -46,9 +56,10 @@ class Deliveries {
 
       const page = this.lastResultsPage + 1
       const pageSize = this.resultsPageSize
+      const filters = this.serializedFilters
 
       try {
-        this.request = await getDeliveries(page, pageSize)
+        this.request = await getDeliveries(page, pageSize, filters)
       }
       catch(e) {
         //an error occured on search

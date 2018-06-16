@@ -25,6 +25,7 @@ export default class DeliveryItem extends Component {
   @observable isOpen = false
   @observable selectedReceiver = null
   @observable selectedCollector = null
+  @observable selectedCourier3 = null
 
   openBig = () => {
     this.isOpen = !this.isOpen
@@ -35,20 +36,32 @@ export default class DeliveryItem extends Component {
     if (type == 'recieve') {
       this.selectedReceiver = value
     }
-    else {
+    else if (type == 'collect') {
       this.selectedCollector = value
+    }
+    else {
+      this.selectedCourier3 = value
     }
   }
 
   onInputKeyDown = (e) => {
-    if (e.keyCode === 13) {
+    if (e.keyCode === 13) {  // => F9
       //e.preventDefault()  //fucks up the search.
       e.stopPropagation()
     }
   }
 
-  onDblClick = (type, id) => {
-    this.props.onFilter(type, id)
+  onDblClick = (type, value) => {
+    this.props.onFilter(type, value)
+  }
+
+  onKeyDown = (e, type, value) => {
+    //console.log(e.keyCode)
+    if (e.keyCode === 120) {  // => F9
+      //e.preventDefault()  //fucks up the search.
+      e.stopPropagation()
+      this.props.onFilter(type, value)
+    }
   }
 
   render() {
@@ -58,20 +71,51 @@ export default class DeliveryItem extends Component {
     return (
       <div>
         <Row className="show-grid" styleName={style}>
-          <Col xs={1} md={1} onClick={this.openBig}>
+          {/*<Col xs={1} md={1} onClick={this.openBig}>
             <div>{`#${delivery.Id}`}</div>
+          </Col>*/}
+          <Col xs={2} md={2} onClick={this.openBig}>
+            <div style={{direction: 'ltr'}}>{delivery.FinishtimeSenc}</div>
           </Col>
           <Col xs={2} md={2} onClick={this.openBig}>
-            <div style={{direction: 'ltr'}}>{delivery.ReceivedAt}</div>
+            <div style={{direction: 'ltr'}}>{delivery.DeliveryTime}</div>
+          </Col>
+          <Col xs={2} md={2} onClick={this.openBig}>
+            <div>{delivery.CustomerName}</div>
+          </Col>
+          <Col xs={2} md={2} onClick={this.openBig}>
+            <div>{delivery.CompanyNameLet}</div>
           </Col>
           <Col xs={1} md={1} onClick={this.openBig}>
-            <div>{delivery.FromAddress}</div>
+            <div>{delivery.MyOut}</div>
           </Col>
-          <Col xs={2} md={2} onDoubleClick={() => this.onDblClick(delivery.ToAddress, 11)}>
-            <div>{delivery.ToAddress}</div>
+          <Col xs={1} md={1} style={{paddingRight: '4px'}}>
+            <div><input
+              type="text"
+              name="CityName_1"
+              value={delivery.CityName_1}
+              readOnly={true}
+              onKeyDown={(e) => this.onKeyDown(e, 'CityName_1', delivery.CityName_1)}
+              styleName="filter-input"
+            /></div>
           </Col>
           <Col xs={1} md={1} onClick={this.openBig}>
-            <div>{delivery.Importance}</div>
+            <div>{delivery.archOut}</div>
+          </Col>
+          <Col xs={1} md={1} onClick={this.openBig}>
+            <div>{delivery.mysort2}</div>
+          </Col>
+          <Col xs={1} md={1} onClick={this.openBig}>
+            <div>{delivery.CompanyNameGet}</div>
+          </Col>
+          <Col xs={1} md={1} onClick={this.openBig}>
+            <div>{delivery.Mydes}</div>
+          </Col>
+          <Col xs={1} md={1} onClick={this.openBig}>
+            <div>{delivery.cityName}</div>
+          </Col>
+          <Col xs={1} md={1} onClick={this.openBig}>
+            <div>{delivery.archDes}</div>
           </Col>
           <Col xs={2} md={2}>
             <div>
@@ -118,24 +162,65 @@ export default class DeliveryItem extends Component {
             </div>
           </Col>
           <Col xs={1} md={1} onClick={this.openBig}>
-            <div>{delivery.Status}</div>
+            <div>{delivery.DeliveryStatus}</div>
           </Col>
+          <Col xs={1} md={1} onClick={this.openBig}>
+            <div>{delivery.FinishTime}</div>
+          </Col>
+          <Col xs={1} md={1} onClick={this.openBig}>
+            <div>{delivery.UrgencysName}</div>
+          </Col>
+          <Col xs={1} md={1} onClick={this.openBig}>
+            <div>{delivery.Govayna}</div>
+          </Col>
+
         </Row>
         <Row className="show-grid" style={show}>
 
-          <Col xs={6} md={6} style={{lineHeight: '2'}}>
-            <div>{t('deliveries.from')}: {delivery.From}</div>
-            <div>{t('deliveries.to')}: {delivery.To}</div>
-            <div>{t('deliveries.deliveryNote')}: {delivery.DeliveryNote}</div>
-            <div>{t('deliveries.name1')}: {delivery.Name1}</div>
-            <div>{t('deliveries.name2')}: {delivery.Name2}</div>
+          <Col xs={8} md={8} styleName="details">
+            <div>{t('deliveries.deliveryNumber')}: {delivery.CustomerDeliveryNo}</div>
+            <div>{t('deliveries.barCode')}: {delivery.Barcode}</div>
+            <div>{t('deliveries.comments')}: {delivery.Comment}</div>
+            <div>{t('deliveries.orderedBy')}: {delivery.ContactManName}</div>
+            <div>{t('deliveries.userName')}: {delivery.UserName}</div>
           </Col>
-          <Col xs={6} md={6} style={{lineHeight: '2'}}>
-            <div>{t('deliveries.date')}: {delivery.Date}</div>
-            <div>{t('deliveries.description')}: {delivery.Description}</div>
-            <div>{t('deliveries.combo')}: {delivery.Combo1}</div>
-            <div>{t('deliveries.reciever1')}: {delivery.Reciever1}</div>
-            <div>{t('deliveries.collect')}: {delivery.Collect}</div>
+          <Col xs={8} md={8} styleName="details">
+            <div>{t('deliveries.deliveryType')}: {delivery.WhereToWhere == 1 ? t('deliveries.transfer') :
+              delivery.WhereToWhere == 2 ? t('deliveries.delivery') :
+                delivery.WhereToWhere == 3 ? t('deliveries.get') : ''}</div>
+            <div>{t('deliveries.vehicleType')}: {delivery.VehicleTypeID}</div>
+            <div>{t('deliveries.extraCourier')}:
+              <div>
+                <Select
+                  className="search-select"
+                  menuContainerStyle={{overflowY: 'visible', height: '200px'}}
+                  name="employee3"
+                  placeholder={t('deliveries.placeHolder')}
+                  noResultsText={null}
+                  searchPromptText=""
+                  rtl={true}
+                  multi={false}
+                  cache={false}
+                  clearable={false}
+                  options={toJS(employees)}
+                  onChange={value => this.onChange(value, 'emp3')}
+                  onInputKeyDown={this.onInputKeyDown}
+                  value={this.selectedCourier3}
+                  labelKey={'EmployeeName'}
+                  valueKey={'EmployeeID'}
+                />
+              </div>
+            </div>
+            <div>{t('deliveries.contractor')}: {delivery.DeliveyOut}</div>
+            <div>{t('deliveries.receiver')}: {delivery.Receiver}</div>
+          </Col>
+          <Col xs={8} md={8} styleName="details">
+            <div>{t('deliveries.deliveryDate')}: {delivery.DeliveryDate}</div>
+            <div>{t('deliveries.coordinatedAt')}: {delivery.tehumDate}</div>
+            <div>{t('deliveries.invoiceNum')}: {delivery.InvoiceNum}</div>
+            <div>{t('deliveries.packageNum')}: {delivery.PakageNum}</div>
+            <div>{t('deliveries.boxNum')}: {delivery.BoxNum}</div>
+            <div>{t('deliveries.wait')}: {delivery.Waitingss}</div>
           </Col>
 
         </Row>

@@ -5,6 +5,7 @@ import {inject, observer} from 'mobx-react'
 import {observable, toJS} from 'mobx'
 import {Jumbotron, Grid, Row, Col} from 'react-bootstrap'
 import List from 'components/List'
+import {doFilter} from 'common/utils/filter'
 import CSSModules from 'react-css-modules'
 import styles from './deliveries.scss'
 
@@ -22,8 +23,19 @@ export default class Deliveries extends Component {
     deliveriesStore.loadEmployees()
   }
 
-  onFilter = (type, id) => {
-    console.log(type, id)
+  onFilter = (field, value) => {
+    //console.log(field, value)
+    const {deliveriesStore} = this.props
+    doFilter(deliveriesStore, field, value)
+    //console.log(deliveriesStore.filters)
+  }
+
+  clearFilter = () => {
+    //for now - clear all filters from store. implement: clear by type
+    const {deliveriesStore} = this.props
+    deliveriesStore.filters.clear()
+    deliveriesStore.clearResults()
+    deliveriesStore.loadDeliveries()
   }
 
   render() {
@@ -37,22 +49,51 @@ export default class Deliveries extends Component {
             {t('deliveries.subtitle')}
           </p>
         </Jumbotron>
+        {deliveriesStore.filters.length > 0 && deliveriesStore.filters.map((filter, index) =>
+          <div key={index} styleName="filter-div">
+            <span onClick={this.clearFilter} styleName="filter-close">x</span><div> {filter.field} {filter.value}</div>
+          </div>)
+        }
         <Grid styleName="show-grid">
           <Row className="show-grid" styleName="head-row">
-            <Col xs={1} md={1}>
+            {/*<Col xs={1} md={1}>
               <div>{t('deliveries.id')}</div>
+            </Col>*/}
+            <Col xs={2} md={2}>
+              <div>{t('deliveries.finishTime')}</div>
             </Col>
             <Col xs={2} md={2}>
-              <div>{t('deliveries.receivedAt')}</div>
-            </Col>
-            <Col xs={1} md={1}>
-              <div>{t('deliveries.fromAddress')}</div>
+              <div>{t('deliveries.deliveryTime')}</div>
             </Col>
             <Col xs={2} md={2}>
-              <div>{t('deliveries.toAddress')}</div>
+              <div>{t('deliveries.customerName')}</div>
+            </Col>
+            <Col xs={2} md={2}>
+              <div>{t('deliveries.from')}</div>
             </Col>
             <Col xs={1} md={1}>
-              <div>{t('deliveries.importance')}</div>
+              <div>{t('deliveries.fromWhere')}</div>
+            </Col>
+            <Col xs={1} md={1}>
+              <div>{t('deliveries.cityName')}</div>
+            </Col>
+            <Col xs={1} md={1}>
+              <div>{t('deliveries.area')}</div>
+            </Col>
+            <Col xs={1} md={1}>
+              <div>{t('deliveries.update')}</div>
+            </Col>
+            <Col xs={1} md={1}>
+              <div>{t('deliveries.to')}</div>
+            </Col>
+            <Col xs={1} md={1}>
+              <div>{t('deliveries.toWhere')}</div>
+            </Col>
+            <Col xs={1} md={1}>
+              <div>{t('deliveries.destCityName')}</div>
+            </Col>
+            <Col xs={1} md={1}>
+              <div>{t('deliveries.destArea')}</div>
             </Col>
             <Col xs={2} md={2}>
               <div>{t('deliveries.courierDelivered')}</div>
@@ -62,6 +103,15 @@ export default class Deliveries extends Component {
             </Col>
             <Col xs={1} md={1}>
               <div>{t('deliveries.status')}</div>
+            </Col>
+            <Col xs={1} md={1}>
+              <div>{t('deliveries.endDeliveryTime')}</div>
+            </Col>
+            <Col xs={1} md={1}>
+              <div>{t('deliveries.urgency')}</div>
+            </Col>
+            <Col xs={1} md={1}>
+              <div>{t('deliveries.collect')}</div>
             </Col>
           </Row>
           <div>

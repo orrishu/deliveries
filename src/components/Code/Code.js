@@ -64,40 +64,42 @@ export default class Code extends Component {
           </p>
         </Jumbotron>
         <Grid>
-          <Col xs={6} md={6}>
-            <form>
-              <FormGroup
-                controlId="formBasicText"
-                validationState={this.getValidationState()}
-              >
-                <ControlLabel>{t('code.add')}</ControlLabel>
-                <FormControl
-                  type="text"
-                  value={this.code}
-                  placeholder="Enter text"
-                  onChange={this.handleChange}
-                  onKeyDown={this.onKeyDown}
-                />
-                <FormControl.Feedback />
-                <HelpBlock>Validation is based on string length.</HelpBlock>
-              </FormGroup>
-            </form>
-          </Col>
-          <Col xs={6} md={6}>
-          </Col>
+          <Row>
+            <Col xs={12} md={12}>
+              <form>
+                <FormGroup
+                  controlId="formBasicText"
+                  validationState={this.getValidationState()}
+                >
+                  <ControlLabel>{t('code.add')}</ControlLabel>
+                  <FormControl
+                    type="text"
+                    value={this.code}
+                    placeholder="Enter text"
+                    onChange={this.handleChange}
+                    onKeyDown={this.onKeyDown}
+                  />
+                  <FormControl.Feedback />
+                  <HelpBlock>Validation is based on string length.</HelpBlock>
+                </FormGroup>
+              </form>
+            </Col>
+            <Col xs={12} md={12}>
+            </Col>
+          </Row>
         </Grid>
         <hr />
         <h3>{t('code.existing')}</h3>
         <Grid styleName="show-grid">
           {codeStore.codes.map((code, index) =>
             <Row key={index} className="show-grid">
-              <Col xs={2} md={2}>
+              <Col xs={4} md={4}>
                 <code>{code.id}</code>
               </Col>
-              <Col xs={6} md={6}>
+              <Col xs={12} md={12}>
                 <code>{code.code}</code>
               </Col>
-              <Col xs={2} md={2}>
+              <Col xs={4} md={4}>
                 <code>{code.count}</code>
               </Col>
             </Row>)
