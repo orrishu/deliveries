@@ -5,6 +5,7 @@ import {inject, observer} from 'mobx-react'
 import {observable, toJS} from 'mobx'
 import {Jumbotron, Grid, Row, Col} from 'react-bootstrap'
 import List from 'components/List'
+import Filters from 'common/components/Filters'
 import {doFilter} from 'common/utils/filter'
 import CSSModules from 'react-css-modules'
 import styles from './deliveries.scss'
@@ -30,14 +31,6 @@ export default class Deliveries extends Component {
     //console.log(deliveriesStore.filters)
   }
 
-  clearFilter = () => {
-    //for now - clear all filters from store. implement: clear by type
-    const {deliveriesStore} = this.props
-    deliveriesStore.filters.clear()
-    deliveriesStore.clearResults()
-    deliveriesStore.loadDeliveries()
-  }
-
   render() {
     const {deliveriesStore, t} = this.props
 
@@ -49,12 +42,8 @@ export default class Deliveries extends Component {
             {t('deliveries.subtitle')}
           </p>
         </Jumbotron>
-        {deliveriesStore.filters.length > 0 && deliveriesStore.filters.map((filter, index) =>
-          <div key={index} styleName="filter-div">
-            <span onClick={this.clearFilter} styleName="filter-close">x</span><div> {filter.field} {filter.value}</div>
-          </div>)
-        }
-        <Grid styleName="show-grid">
+        <Filters />
+        <Grid styleName="show-grid" style={{paddingTop: '45px'}}>
           <Row className="show-grid" styleName="head-row">
             {/*<Col xs={1} md={1}>
               <div>{t('deliveries.id')}</div>

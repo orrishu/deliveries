@@ -5,8 +5,15 @@ import {inject, observer} from 'mobx-react'
 import {observable, toJS} from 'mobx'
 import {Grid, Row, Col, DropdownButton, MenuItem} from 'react-bootstrap'
 import Select from 'react-select'
+import {setDeliveryEmployee} from 'common/services/apiService'
 import CSSModules from 'react-css-modules'
 import styles from './deliveries.scss'
+
+const courierType = {
+  collect: 1,
+  deliver: 2,
+  third: 3
+}
 
 @translate()
 //@inject('translationsStore')
@@ -31,16 +38,19 @@ export default class DeliveryItem extends Component {
     this.isOpen = !this.isOpen
   }
 
-  onChange = (value, type) => {
+  onChange = (value, num, type) => {
     console.log(value, type)
-    if (type == 'recieve') {
+    if (type == 'deliver') {
       this.selectedReceiver = value
+      setDeliveryEmployee(num, value.EmployeeID, courierType.deliver)
     }
     else if (type == 'collect') {
       this.selectedCollector = value
+      setDeliveryEmployee(num, value.EmployeeID, courierType.collect)
     }
     else {
       this.selectedCourier3 = value
+      setDeliveryEmployee(num, value.EmployeeID, courierType.third)
     }
   }
 
@@ -80,7 +90,7 @@ export default class DeliveryItem extends Component {
           <Col xs={2} md={2} onClick={this.openBig}>
             <div style={{direction: 'ltr'}}>{delivery.DeliveryTime}</div>
           </Col>
-          <Col xs={2} md={2} onClick={this.openBig}>
+          <Col xs={2} md={2} onDoubleClick={() => this.onDblClick('CustomerName', delivery.CustomerName)}>
             <div>{delivery.CustomerName}</div>
           </Col>
           <Col xs={2} md={2} onClick={this.openBig}>
@@ -89,7 +99,7 @@ export default class DeliveryItem extends Component {
           <Col xs={1} md={1} onClick={this.openBig}>
             <div>{delivery.MyOut}</div>
           </Col>
-          <Col xs={1} md={1} style={{paddingRight: '4px'}}>
+          <Col xs={1} md={1} style={{paddingRight: '4px'}} onDoubleClick={() => this.onDblClick('CityName_1', delivery.CityName_1)}>
             <div><input
               type="text"
               name="CityName_1"
@@ -131,7 +141,7 @@ export default class DeliveryItem extends Component {
                 cache={false}
                 clearable={false}
                 options={toJS(employees)}
-                onChange={value => this.onChange(value, 'recieve')}
+                onChange={value => this.onChange(value, delivery.DeliveryNumber, 'deliver')}
                 onInputKeyDown={this.onInputKeyDown}
                 value={this.selectedReceiver}
                 labelKey={'EmployeeName'}
@@ -153,7 +163,7 @@ export default class DeliveryItem extends Component {
                 cache={false}
                 clearable={false}
                 options={toJS(employees)}
-                onChange={value => this.onChange(value, 'collect')}
+                onChange={value => this.onChange(value, delivery.DeliveryNumber, 'collect')}
                 onInputKeyDown={this.onInputKeyDown}
                 value={this.selectedCollector}
                 labelKey={'EmployeeName'}
@@ -203,7 +213,7 @@ export default class DeliveryItem extends Component {
                   cache={false}
                   clearable={false}
                   options={toJS(employees)}
-                  onChange={value => this.onChange(value, 'emp3')}
+                  onChange={value => this.onChange(value, delivery.DeliveryNumber, 'emp3')}
                   onInputKeyDown={this.onInputKeyDown}
                   value={this.selectedCourier3}
                   labelKey={'EmployeeName'}

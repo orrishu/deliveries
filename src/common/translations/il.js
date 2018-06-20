@@ -61,5 +61,9 @@ export default {
     boxNum: 'מס קרטונים',
     wait: 'המתנה',
     placeHolder: 'חפש עובד'
+  },
+  filters: {
+    CityName_1: 'עיר',
+    CustomerName : 'שם לקוח'
   }
 }

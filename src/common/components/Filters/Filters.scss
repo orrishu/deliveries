@@ -1,0 +1,19 @@
+.filter-heading {
+  float: right;
+  padding-right: 4px;
+}
+
+.filter-label {
+    position: relative;
+}
+
+.filter-close {
+  cursor: pointer;
+  position: absolute;
+  right: 5px;
+  top: 8px;
+}
+
+.filter-value {
+  padding-right: 14px;
+}

@@ -113,3 +113,12 @@ export async function getEmployees() {
   )*/
   return apiFetch('Deliveries/GetEmployees') //, {searchParams: {InstalledProducID: id}})
 }
+
+export function setDeliveryEmployee(deliveryNumber, employeeID, employeeType) {
+  return apiFetch('Deliveries/SetDeliveryEmployee',
+    {searchParams: {
+      DeliveryNumber: deliveryNumber,
+      EmployeeID: employeeID,
+      Type: employeeType}
+    }, true)
+}
