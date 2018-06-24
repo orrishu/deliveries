@@ -45,9 +45,9 @@ export default class Deliveries extends Component {
         <Filters />
         <Grid styleName="show-grid" style={{paddingTop: '45px'}}>
           <Row className="show-grid" styleName="head-row">
-            {/*<Col xs={1} md={1}>
-              <div>{t('deliveries.id')}</div>
-            </Col>*/}
+            <Col xs={1} md={1}>
+              
+            </Col>
             <Col xs={2} md={2}>
               <div>{t('deliveries.finishTime')}</div>
             </Col>
@@ -99,9 +99,9 @@ export default class Deliveries extends Component {
             <Col xs={1} md={1}>
               <div>{t('deliveries.urgency')}</div>
             </Col>
-            <Col xs={1} md={1}>
+            {/*<Col xs={1} md={1}>
               <div>{t('deliveries.collect')}</div>
-            </Col>
+            </Col>*/}
           </Row>
           <div>
             <List

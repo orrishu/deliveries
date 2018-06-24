@@ -5,6 +5,7 @@ import {inject, observer} from 'mobx-react'
 import {observable, toJS} from 'mobx'
 import {Grid, Row, Col, DropdownButton, MenuItem} from 'react-bootstrap'
 import Select from 'react-select'
+import moment from 'moment'
 import {setDeliveryEmployee} from 'common/services/apiService'
 import CSSModules from 'react-css-modules'
 import styles from './deliveries.scss'
@@ -81,22 +82,22 @@ export default class DeliveryItem extends Component {
     return (
       <div>
         <Row className="show-grid" styleName={style}>
-          {/*<Col xs={1} md={1} onClick={this.openBig}>
-            <div>{`#${delivery.Id}`}</div>
-          </Col>*/}
-          <Col xs={2} md={2} onClick={this.openBig}>
-            <div style={{direction: 'ltr'}}>{delivery.FinishtimeSenc}</div>
+          <Col xs={1} md={1} onClick={this.openBig}>
+            <div styleName="open-big">{this.isOpen ? '-' : '+'}</div>
           </Col>
-          <Col xs={2} md={2} onClick={this.openBig}>
-            <div style={{direction: 'ltr'}}>{delivery.DeliveryTime}</div>
+          <Col xs={2} md={2}>
+            <div style={{direction: 'ltr'}}>{moment(delivery.FinishtimeSenc).format('HH:mm:ss')}</div>
           </Col>
-          <Col xs={2} md={2} onDoubleClick={() => this.onDblClick('CustomerName', delivery.CustomerName)}>
+          <Col xs={2} md={2}>
+            <div style={{direction: 'ltr'}}>{moment(delivery.DeliveryTime).format('HH:mm:ss')}</div>
+          </Col>
+          <Col xs={2} md={2}onDoubleClick={() => this.onDblClick('CustomerName', delivery.CustomerName)}>
             <div>{delivery.CustomerName}</div>
           </Col>
-          <Col xs={2} md={2} onClick={this.openBig}>
+          <Col xs={2} md={2}>
             <div>{delivery.CompanyNameLet}</div>
           </Col>
-          <Col xs={1} md={1} onClick={this.openBig}>
+          <Col xs={1} md={1}>
             <div>{delivery.MyOut}</div>
           </Col>
           <Col xs={1} md={1} style={{paddingRight: '4px'}} onDoubleClick={() => this.onDblClick('CityName_1', delivery.CityName_1)}>
@@ -109,22 +110,22 @@ export default class DeliveryItem extends Component {
               styleName="filter-input"
             /></div>
           </Col>
-          <Col xs={1} md={1} onClick={this.openBig}>
+          <Col xs={1} md={1}>
             <div>{delivery.archOut}</div>
           </Col>
-          <Col xs={1} md={1} onClick={this.openBig}>
+          <Col xs={1} md={1}>
             <div>{delivery.mysort2}</div>
           </Col>
-          <Col xs={1} md={1} onClick={this.openBig}>
+          <Col xs={1} md={1}>
             <div>{delivery.CompanyNameGet}</div>
           </Col>
-          <Col xs={1} md={1} onClick={this.openBig}>
+          <Col xs={1} md={1}>
             <div>{delivery.Mydes}</div>
           </Col>
-          <Col xs={1} md={1} onClick={this.openBig}>
+          <Col xs={1} md={1}>
             <div>{delivery.cityName}</div>
           </Col>
-          <Col xs={1} md={1} onClick={this.openBig}>
+          <Col xs={1} md={1}>
             <div>{delivery.archDes}</div>
           </Col>
           <Col xs={2} md={2}>
@@ -171,24 +172,25 @@ export default class DeliveryItem extends Component {
               />
             </div>
           </Col>
-          <Col xs={1} md={1} onClick={this.openBig}>
+          <Col xs={1} md={1}>
             <div>{delivery.DeliveryStatus}</div>
           </Col>
-          <Col xs={1} md={1} onClick={this.openBig}>
-            <div>{delivery.FinishTime}</div>
+          <Col xs={1} md={1}>
+            <div>{moment(delivery.FinishTime).format('HH:mm:ss')}</div>
           </Col>
-          <Col xs={1} md={1} onClick={this.openBig}>
+          <Col xs={1} md={1}>
             <div>{delivery.UrgencysName}</div>
           </Col>
-          <Col xs={1} md={1} onClick={this.openBig}>
+          {/*<Col xs={1} md={1} onClick={this.openBig}>
             <div>{delivery.Govayna}</div>
-          </Col>
+          </Col>*/}
 
         </Row>
         <Row className="show-grid" style={show}>
 
           <Col xs={8} md={8} styleName="details">
             <div>{t('deliveries.deliveryNumber')}: {delivery.CustomerDeliveryNo}</div>
+            <div>{t('deliveries.collect')}: {delivery.Govayna}</div>
             <div>{t('deliveries.barCode')}: {delivery.Barcode}</div>
             <div>{t('deliveries.comments')}: {delivery.Comment}</div>
             <div>{t('deliveries.orderedBy')}: {delivery.ContactManName}</div>
@@ -199,8 +201,8 @@ export default class DeliveryItem extends Component {
               delivery.WhereToWhere == 2 ? t('deliveries.delivery') :
                 delivery.WhereToWhere == 3 ? t('deliveries.get') : ''}</div>
             <div>{t('deliveries.vehicleType')}: {delivery.VehicleTypeID}</div>
-            <div>{t('deliveries.extraCourier')}:
-              <div>
+            <div styleName="clearfix"><span styleName="combo-r">{t('deliveries.extraCourier')}:</span>
+              <span styleName="combo-l">
                 <Select
                   className="search-select"
                   menuContainerStyle={{overflowY: 'visible', height: '200px'}}
@@ -219,14 +221,14 @@ export default class DeliveryItem extends Component {
                   labelKey={'EmployeeName'}
                   valueKey={'EmployeeID'}
                 />
-              </div>
+              </span>
             </div>
             <div>{t('deliveries.contractor')}: {delivery.DeliveyOut}</div>
             <div>{t('deliveries.receiver')}: {delivery.Receiver}</div>
           </Col>
           <Col xs={8} md={8} styleName="details">
-            <div>{t('deliveries.deliveryDate')}: {delivery.DeliveryDate}</div>
-            <div>{t('deliveries.coordinatedAt')}: {delivery.tehumDate}</div>
+            <div styleName="clearfix"><div styleName="date-div-label">{t('deliveries.deliveryDate')}:</div> <div styleName="date-div">{moment(delivery.DeliveryDate).format('DD/MM/YYYY HH:mm:ss')}</div></div>
+            <div styleName="clearfix"><div styleName="date-div-label">{t('deliveries.coordinatedAt')}:</div> <div styleName="date-div">{moment(delivery.tehumDate).format('DD/MM/YYYY HH:mm:ss')}</div></div>
             <div>{t('deliveries.invoiceNum')}: {delivery.InvoiceNum}</div>
             <div>{t('deliveries.packageNum')}: {delivery.PakageNum}</div>
             <div>{t('deliveries.boxNum')}: {delivery.BoxNum}</div>
