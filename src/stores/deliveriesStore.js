@@ -10,6 +10,8 @@ class Deliveries {
   @observable deliveries = []
   @observable filters = []; //chosen filters from filters component
   @observable availableFilters = [];  //all relevant filters;
+  @observable sortBy = ''
+  @observable sortDir = ''
   @observable searchError = null
   @observable filtersError = null
   @observable empLoading = false
@@ -23,9 +25,24 @@ class Deliveries {
   //@observable add = {};
 
   @computed
+  get serializedSort() {
+    let sort = []
+    if (this.sortBy != '')
+      sort = [{field: this.sortBy, isAscending: (this.sortDir == 'asc')}]
+
+    return JSON.stringify(sort)
+  }
+
+  @computed
   get serializedFilters() {
     const filters = toJS(this.filters)
     return filters
+  }
+
+  @action.bound
+  applySort(sortBy, sortDir) {
+    this.sortBy = sortBy
+    this.sortDir = sortDir
   }
 
   @action.bound
@@ -57,9 +74,10 @@ class Deliveries {
       const page = this.lastResultsPage + 1
       const pageSize = this.resultsPageSize
       const filters = this.serializedFilters
+      const sort = this.serializedSort
 
       try {
-        this.request = await getDeliveries(page, pageSize, filters)
+        this.request = await getDeliveries(page, pageSize, filters, sort)
       }
       catch(e) {
         //an error occured on search

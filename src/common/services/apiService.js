@@ -94,9 +94,9 @@ export function addNewCode(code) {
   return Promise.resolve([])
 }
 
-export async function getDeliveries(page, pageSize, filters) {
+export async function getDeliveries(page, pageSize, filters, sort) {  
   return apiFetch('Deliveries/GetDeliveries',
-    {searchParams: {page, pageSize, filters}}).then(res => {
+    {searchParams: {page, pageSize, filters, sort}}).then(res => {
     return {
       total: res.info.count,
       page: res.info.page,

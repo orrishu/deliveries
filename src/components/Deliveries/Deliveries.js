@@ -31,6 +31,16 @@ export default class Deliveries extends Component {
     //console.log(deliveriesStore.filters)
   }
 
+  onSort = (sortBy) => {
+    const {deliveriesStore} = this.props
+    const sortDir = sortBy != deliveriesStore.sortBy ? 'asc' :
+      deliveriesStore.sortDir == 'asc' ? 'desc' : 'asc'
+
+    deliveriesStore.applySort(sortBy, sortDir)
+    deliveriesStore.clearResults()
+    deliveriesStore.loadDeliveries()
+  }
+
   render() {
     const {deliveriesStore, t} = this.props
 
@@ -46,7 +56,7 @@ export default class Deliveries extends Component {
         <Grid styleName="show-grid" style={{paddingTop: '45px'}}>
           <Row className="show-grid" styleName="head-row">
             <Col xs={1} md={1}>
-              
+
             </Col>
             <Col xs={2} md={2}>
               <div>{t('deliveries.finishTime')}</div>
@@ -55,13 +65,31 @@ export default class Deliveries extends Component {
               <div>{t('deliveries.deliveryTime')}</div>
             </Col>
             <Col xs={2} md={2}>
-              <div>{t('deliveries.customerName')}</div>
+              <div onClick={() => this.onSort('CustomerName')}>
+                {t('deliveries.customerName')}
+                <SortIndicator
+                  sortDir={deliveriesStore.sortDir}
+                  show={deliveriesStore.sortBy == 'CustomerName'}
+                />
+              </div>
             </Col>
             <Col xs={2} md={2}>
-              <div>{t('deliveries.from')}</div>
+              <div onClick={() => this.onSort('CompanyNameLet')}>
+                {t('deliveries.from')}
+                <SortIndicator
+                  sortDir={deliveriesStore.sortDir}
+                  show={deliveriesStore.sortBy == 'CompanyNameLet'}
+                />
+              </div>
             </Col>
             <Col xs={1} md={1}>
-              <div>{t('deliveries.fromWhere')}</div>
+              <div onClick={() => this.onSort('MyOut')}>
+                {t('deliveries.fromWhere')}
+                <SortIndicator
+                  sortDir={deliveriesStore.sortDir}
+                  show={deliveriesStore.sortBy == 'MyOut'}
+                />
+              </div>
             </Col>
             <Col xs={1} md={1}>
               <div>{t('deliveries.cityName')}</div>
@@ -114,4 +142,9 @@ export default class Deliveries extends Component {
       </div>
     )
   }
+}
+
+const SortIndicator = ({sortDir, show}) => {
+  const indicator = show ? sortDir == 'asc' ? '&uarr;' : '&darr;' : ''
+  return <span style={{paddingRight: '5px'}} dangerouslySetInnerHTML={{__html: indicator}}></span>
 }
