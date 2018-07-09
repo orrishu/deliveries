@@ -6,7 +6,7 @@ import {observable, toJS} from 'mobx'
 import {Grid, Row, Col, DropdownButton, MenuItem} from 'react-bootstrap'
 import Select from 'react-select'
 import moment from 'moment'
-import {setDeliveryEmployee} from 'common/services/apiService'
+import {setDeliveryEmployee, setDeliveryStatus} from 'common/services/apiService'
 import CSSModules from 'react-css-modules'
 import styles from './deliveries.scss'
 
@@ -27,6 +27,7 @@ export default class DeliveryItem extends Component {
     delivery: object,
     ix: number,
     employees: array,
+    statuses: array,
     onFilter: func
   }
 
@@ -34,6 +35,15 @@ export default class DeliveryItem extends Component {
   @observable selectedReceiver = null
   @observable selectedCollector = null
   @observable selectedCourier3 = null
+  @observable selectedStatus = null
+
+  componentWillMount() {
+    const {delivery} = this.props
+    this.selectedReceiver = delivery.oEmployeeID
+    this.selectedCollector = delivery.oEmployeeIDsec
+    this.selectedCourier3 = delivery.oEmployeeID_Third
+    this.selectedStatus = delivery.oDeliveryStatus
+  }
 
   openBig = () => {
     this.isOpen = !this.isOpen
@@ -48,6 +58,10 @@ export default class DeliveryItem extends Component {
     else if (type == 'collect') {
       this.selectedCollector = value
       setDeliveryEmployee(num, value.EmployeeID, courierType.collect)
+    }
+    else if (type == 'status') {
+      this.selectedStatus = value
+      setDeliveryStatus(num, value.StatusID)
     }
     else {
       this.selectedCourier3 = value
@@ -76,7 +90,7 @@ export default class DeliveryItem extends Component {
   }
 
   render() {
-    const {delivery, ix, employees, t} = this.props
+    const {delivery, ix, employees, statuses, t} = this.props
     const show = this.isOpen ? {} : {display: 'none'}
     const style = ix % 2 == 0 ? 'row' : 'alt-row'
     return (
@@ -113,9 +127,9 @@ export default class DeliveryItem extends Component {
           <Col xs={1} md={1}>
             <div>{delivery.archOut}</div>
           </Col>
-          <Col xs={1} md={1}>
+          {/*<Col xs={1} md={1}>
             <div>{delivery.mysort2}</div>
-          </Col>
+          </Col>*/}
           <Col xs={1} md={1}>
             <div>{delivery.CompanyNameGet}</div>
           </Col>
@@ -172,8 +186,27 @@ export default class DeliveryItem extends Component {
               />
             </div>
           </Col>
-          <Col xs={1} md={1}>
-            <div>{delivery.DeliveryStatus}</div>
+          <Col xs={2} md={2}>
+            <div>
+              <Select
+                className="search-select"
+                menuContainerStyle={{overflowY: 'visible', height: '200px'}}
+                name="deliveryStatus"
+                placeholder={t('deliveries.placeholderStat')}
+                noResultsText={null}
+                searchPromptText=""
+                rtl={true}
+                multi={false}
+                cache={false}
+                clearable={false}
+                options={toJS(statuses)}
+                onChange={value => this.onChange(value, delivery.DeliveryNumber, 'status')}
+                onInputKeyDown={this.onInputKeyDown}
+                value={this.selectedStatus}
+                labelKey={'StatusName'}
+                valueKey={'StatusID'}
+              />
+            </div>
           </Col>
           <Col xs={1} md={1}>
             <div>{moment(delivery.FinishTime).format('HH:mm:ss')}</div>
@@ -201,6 +234,7 @@ export default class DeliveryItem extends Component {
               delivery.WhereToWhere == 2 ? t('deliveries.delivery') :
                 delivery.WhereToWhere == 3 ? t('deliveries.get') : ''}</div>
             <div>{t('deliveries.vehicleType')}: {delivery.VehicleTypeID}</div>
+            <div>{t('deliveries.update')}: {delivery.mysort2}</div>
             <div styleName="clearfix"><span styleName="combo-r">{t('deliveries.extraCourier')}:</span>
               <span styleName="combo-l">
                 <Select

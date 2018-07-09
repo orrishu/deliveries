@@ -31,6 +31,7 @@ export default class List extends React.Component {
         delivery={item}
         ix={index}
         employees={toJS(store.employees)}
+        statuses={toJS(store.statuses)}
         onFilter={this.props.onFilter}
       />
     }, this)

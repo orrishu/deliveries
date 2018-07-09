@@ -22,6 +22,7 @@ export default class Deliveries extends Component {
     const {deliveriesStore} = this.props
     deliveriesStore.loadDeliveries()
     deliveriesStore.loadEmployees()
+    deliveriesStore.loadStatuses()
   }
 
   onFilter = (field, value) => {
@@ -59,13 +60,25 @@ export default class Deliveries extends Component {
 
             </Col>
             <Col xs={2} md={2}>
-              <div>{t('deliveries.finishTime')}</div>
+              <div styleName="head-col" onClick={() => this.onSort('FinishtimeSenc')}>
+                {t('deliveries.finishTime')}
+                <SortIndicator
+                  sortDir={deliveriesStore.sortDir}
+                  show={deliveriesStore.sortBy == 'FinishtimeSenc'}
+                />
+              </div>
             </Col>
             <Col xs={2} md={2}>
-              <div>{t('deliveries.deliveryTime')}</div>
+              <div styleName="head-col" onClick={() => this.onSort('DeliveryTime')}>
+                {t('deliveries.deliveryTime')}
+                <SortIndicator
+                  sortDir={deliveriesStore.sortDir}
+                  show={deliveriesStore.sortBy == 'DeliveryTime'}
+                />
+              </div>
             </Col>
             <Col xs={2} md={2}>
-              <div onClick={() => this.onSort('CustomerName')}>
+              <div styleName="head-col" onClick={() => this.onSort('CustomerName')}>
                 {t('deliveries.customerName')}
                 <SortIndicator
                   sortDir={deliveriesStore.sortDir}
@@ -74,7 +87,7 @@ export default class Deliveries extends Component {
               </div>
             </Col>
             <Col xs={2} md={2}>
-              <div onClick={() => this.onSort('CompanyNameLet')}>
+              <div styleName="head-col" onClick={() => this.onSort('CompanyNameLet')}>
                 {t('deliveries.from')}
                 <SortIndicator
                   sortDir={deliveriesStore.sortDir}
@@ -83,7 +96,7 @@ export default class Deliveries extends Component {
               </div>
             </Col>
             <Col xs={1} md={1}>
-              <div onClick={() => this.onSort('MyOut')}>
+              <div styleName="head-col" onClick={() => this.onSort('MyOut')}>
                 {t('deliveries.fromWhere')}
                 <SortIndicator
                   sortDir={deliveriesStore.sortDir}
@@ -92,25 +105,61 @@ export default class Deliveries extends Component {
               </div>
             </Col>
             <Col xs={1} md={1}>
-              <div>{t('deliveries.cityName')}</div>
+              <div styleName="head-col" onClick={() => this.onSort('CityName_1')}>
+                {t('deliveries.cityName')}
+                <SortIndicator
+                  sortDir={deliveriesStore.sortDir}
+                  show={deliveriesStore.sortBy == 'CityName_1'}
+                />
+              </div>
             </Col>
             <Col xs={1} md={1}>
-              <div>{t('deliveries.area')}</div>
+              <div styleName="head-col" onClick={() => this.onSort('archOut')}>
+                {t('deliveries.area')}
+                <SortIndicator
+                  sortDir={deliveriesStore.sortDir}
+                  show={deliveriesStore.sortBy == 'archOut'}
+                />
+              </div>
             </Col>
-            <Col xs={1} md={1}>
+            {/*<Col xs={1} md={1}>
               <div>{t('deliveries.update')}</div>
+            </Col>*/}
+            <Col xs={1} md={1}>
+              <div styleName="head-col" onClick={() => this.onSort('CompanyNameGet')}>
+                {t('deliveries.to')}
+                <SortIndicator
+                  sortDir={deliveriesStore.sortDir}
+                  show={deliveriesStore.sortBy == 'CompanyNameGet'}
+                />
+              </div>
             </Col>
             <Col xs={1} md={1}>
-              <div>{t('deliveries.to')}</div>
+              <div styleName="head-col" onClick={() => this.onSort('Mydes')}>
+                {t('deliveries.toWhere')}
+                <SortIndicator
+                  sortDir={deliveriesStore.sortDir}
+                  show={deliveriesStore.sortBy == 'Mydes'}
+                />
+              </div>
             </Col>
             <Col xs={1} md={1}>
-              <div>{t('deliveries.toWhere')}</div>
+              <div styleName="head-col" onClick={() => this.onSort('cityName')}>
+                {t('deliveries.destCityName')}
+                <SortIndicator
+                  sortDir={deliveriesStore.sortDir}
+                  show={deliveriesStore.sortBy == 'cityName'}
+                />
+              </div>
             </Col>
             <Col xs={1} md={1}>
-              <div>{t('deliveries.destCityName')}</div>
-            </Col>
-            <Col xs={1} md={1}>
-              <div>{t('deliveries.destArea')}</div>
+              <div styleName="head-col" onClick={() => this.onSort('archDes')}>
+                {t('deliveries.destArea')}
+                <SortIndicator
+                  sortDir={deliveriesStore.sortDir}
+                  show={deliveriesStore.sortBy == 'archDes'}
+                />
+              </div>
             </Col>
             <Col xs={2} md={2}>
               <div>{t('deliveries.courierDelivered')}</div>
@@ -118,14 +167,26 @@ export default class Deliveries extends Component {
             <Col xs={2} md={2}>
               <div>{t('deliveries.courierCollected')}</div>
             </Col>
-            <Col xs={1} md={1}>
+            <Col xs={2} md={2}>
               <div>{t('deliveries.status')}</div>
             </Col>
             <Col xs={1} md={1}>
-              <div>{t('deliveries.endDeliveryTime')}</div>
+              <div styleName="head-col" onClick={() => this.onSort('FinishTime')}>
+                {t('deliveries.endDeliveryTime')}
+                <SortIndicator
+                  sortDir={deliveriesStore.sortDir}
+                  show={deliveriesStore.sortBy == 'FinishTime'}
+                />
+              </div>
             </Col>
             <Col xs={1} md={1}>
-              <div>{t('deliveries.urgency')}</div>
+              <div styleName="head-col" onClick={() => this.onSort('UrgencysName')}>
+                {t('deliveries.urgency')}
+                <SortIndicator
+                  sortDir={deliveriesStore.sortDir}
+                  show={deliveriesStore.sortBy == 'UrgencysName'}
+                />
+              </div>
             </Col>
             {/*<Col xs={1} md={1}>
               <div>{t('deliveries.collect')}</div>

@@ -94,7 +94,7 @@ export function addNewCode(code) {
   return Promise.resolve([])
 }
 
-export async function getDeliveries(page, pageSize, filters, sort) {  
+export async function getDeliveries(page, pageSize, filters, sort) {
   return apiFetch('Deliveries/GetDeliveries',
     {searchParams: {page, pageSize, filters, sort}}).then(res => {
     return {
@@ -106,12 +106,11 @@ export async function getDeliveries(page, pageSize, filters, sort) {
 }
 
 export async function getEmployees() {
-  /*return Promise.resolve(
-    [
-      {id: 1, name: 'Moses'}, {id: 2, name: 'Shimmi'}, {id: 3, name: 'David'}
-    ]
-  )*/
-  return apiFetch('Deliveries/GetEmployees') //, {searchParams: {InstalledProducID: id}})
+  return apiFetch('Deliveries/GetEmployees')
+}
+
+export async function getStatuses() {
+  return apiFetch('Deliveries/GetDeliveryStatus')
 }
 
 export function setDeliveryEmployee(deliveryNumber, employeeID, employeeType) {
@@ -120,5 +119,13 @@ export function setDeliveryEmployee(deliveryNumber, employeeID, employeeType) {
       DeliveryNumber: deliveryNumber,
       EmployeeID: employeeID,
       Type: employeeType}
+    }, true)
+}
+
+export function setDeliveryStatus(deliveryNumber, statusID) {
+  return apiFetch('Deliveries/SetDeliveryStatus',
+    {searchParams: {
+      DeliveryNumber: deliveryNumber,
+      StatusID: statusID}
     }, true)
 }

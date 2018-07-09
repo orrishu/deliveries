@@ -60,7 +60,8 @@ export default {
     packageNum: 'מס חבילות',
     boxNum: 'מס קרטונים',
     wait: 'המתנה',
-    placeHolder: 'חפש עובד'
+    placeHolder: 'חפש עובד',
+    placeholderStat: 'סטטוס'
   },
   filters: {
     CityName_1: 'עיר',

@@ -1,6 +1,6 @@
 import { action, computed, observable, toJS } from 'mobx'
 import isObject from 'lodash/isObject'
-import { getDeliveries, getEmployees } from 'common/services/apiService'
+import { getDeliveries, getEmployees, getStatuses } from 'common/services/apiService'
 
 class Deliveries {
   @observable resultsLoading = false
@@ -15,8 +15,11 @@ class Deliveries {
   @observable searchError = null
   @observable filtersError = null
   @observable empLoading = false
+  @observable statLoading = false
   @observable empData = {};
+  @observable statData = {};
   @observable employees = []
+  @observable statuses = []
   @observable hasMoreResults = true
   @observable lastResultsPage = 0
   @observable resultsPageSize = 10
@@ -134,6 +137,35 @@ class Deliveries {
         this.employees = []
       }
       this.empLoading = false
+    }
+  }
+
+  @action.bound
+  async loadStatuses() {
+    if (!this.statLoading) {
+      this.statLoading = true
+      let statError = null
+      try {
+        this.statData = await getStatuses()
+      }
+      catch(e) {
+        //an error occured on search
+        statError = {
+          message: `[loadStatuses] error: ${e.message} http status code ${e.error.status}`,
+          statusCode: e.error.status
+        }
+      }
+
+      if (statError == null) {
+        console.info('[loadStatuses]')
+        const data = this.statData
+        this.statuses = [...data.map(d => ({ ...d, key: d.Id }))]
+      }
+      else {
+        console.error(toJS(statError))
+        this.statuses = []
+      }
+      this.statLoading = false
     }
   }
 /*
