@@ -32,15 +32,15 @@ export default class DeliveryItem extends Component {
   }
 
   @observable isOpen = false
-  @observable selectedReceiver = null
+  @observable selectedDeliverer = null
   @observable selectedCollector = null
   @observable selectedCourier3 = null
   @observable selectedStatus = null
 
   componentWillMount() {
     const {delivery} = this.props
-    this.selectedReceiver = delivery.oEmployeeID
-    this.selectedCollector = delivery.oEmployeeIDsec
+    this.selectedCollector = delivery.oEmployeeID
+    this.selectedDeliverer  = delivery.oEmployeeIDsec
     this.selectedCourier3 = delivery.oEmployeeID_Third
     this.selectedStatus = delivery.oDeliveryStatus
   }
@@ -52,7 +52,7 @@ export default class DeliveryItem extends Component {
   onChange = (value, num, type) => {
     console.log(value, type)
     if (type == 'deliver') {
-      this.selectedReceiver = value
+      this.selectedDeliverer = value
       setDeliveryEmployee(num, value.EmployeeID, courierType.deliver)
     }
     else if (type == 'collect') {
@@ -158,7 +158,7 @@ export default class DeliveryItem extends Component {
                 options={toJS(employees)}
                 onChange={value => this.onChange(value, delivery.DeliveryNumber, 'deliver')}
                 onInputKeyDown={this.onInputKeyDown}
-                value={this.selectedReceiver}
+                value={this.selectedDeliverer}
                 labelKey={'EmployeeName'}
                 valueKey={'EmployeeID'}
               />
