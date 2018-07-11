@@ -4,9 +4,10 @@ import FormGroup from 'react-bootstrap/lib/FormGroup'
 import ControlLabel from 'react-bootstrap/lib/ControlLabel'
 import FormControl from 'react-bootstrap/lib/FormControl'
 import HelpBlock from 'react-bootstrap/lib/HelpBlock'
+import CSSModules from 'react-css-modules'
+import styles from './style.scss'
 
-import './style.scss'
-
+@CSSModules(styles)
 export default class UILabeledTextField extends React.PureComponent {
   render() {
     const { className, id, label, help, feedback, ...rest } = this.props

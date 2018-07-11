@@ -9,7 +9,8 @@ import { accountStore } from 'stores'
 
 import { whenRouted } from 'common/utils/withRouteHooks'
 import { withRouter } from 'react-router'
-import './style.scss'
+import CSSModules from 'react-css-modules'
+import styles from './style.scss'
 
 @withRouter
 @whenRouted(() => {
@@ -18,6 +19,7 @@ import './style.scss'
   })
 @translate()
 @inject('accountStore')
+@CSSModules(styles)
 @observer
 export default class Login extends React.Component {
   @observable username = ''
@@ -32,33 +34,33 @@ export default class Login extends React.Component {
           <header styleName="login-title">
             <h2>
               <b>
-                {t('loginPage.title')}
+                {t('login.title')}
               </b>
             </h2>
             <h4>
-              {t('loginPage.subtitle')}
+              {t('login.subtitle')}
             </h4>
           </header>
           <LabeledTextField
             type="text"
             value={this.username}
-            label={t('loginPage.usernameLabel')}
+            label={t('login.usernameLabel')}
             onChange={this.writeUsername}
           />
           <LabeledTextField
             type="password"
             value={this.password}
-            label={t('loginPage.passwordLabel')}
+            label={t('login.passwordLabel')}
             onChange={this.writePassword}
           />
           {!this.pending &&
           <Button type="submit" block styleName="login-button">
-            {t('loginPage.loginBtnTitle')}
+            {t('login.loginBtnTitle')}
           </Button>
           }
           {this.pending &&
             <div styleName="login-title" style={{marginTop: '4rem'}}>
-              <h4>{t('loginPage.pleaseWait')}</h4>
+              <h4>{t('login.pleaseWait')}</h4>
             </div>
           }
         </form>

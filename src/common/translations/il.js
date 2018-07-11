@@ -2,10 +2,13 @@ export default {
   page404: 'מצטערים, הקישור שגוי',
   loading: 'טוען...',
   AppTitle: 'בלדר',
-  loginPage: {
+  login: {
+    title: 'בלדר',
+    subtitle: 'התחברות למערכת',
     usernameLabel: 'שם משתמש',
     passwordLabel: 'סיסמה',
     loginBtnTitle: 'כניסה',
+    pleaseWait: 'אנא המתן...',
     loginError: 'פרטי ההזדהות שהזנת שגויים, אנא נסה שנית.'
   },
   nav: {
