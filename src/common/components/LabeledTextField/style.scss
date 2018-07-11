@@ -1,0 +1,9 @@
+//@import '~common/styles/_theme.scss';
+
+.ui-labeled-input {
+  & .ui-label {
+    font-size: 1.6rem;
+    color: #989898;
+    font-weight: 400;
+  }
+}

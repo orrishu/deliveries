@@ -162,9 +162,11 @@ function getPlugins() {
       new ExtractTextPlugin('[name].[hash].css', { allChunks: true }),
       //new webpack.optimize.OccurenceOrderPlugin()
       new webpack.optimize.UglifyJsPlugin({
-        compressor: {
+        parallel: true,
+        cache: true
+        /*compressor: {
           warnings: false
-        }
+        }*/
       })
     ])
   }

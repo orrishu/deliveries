@@ -1,0 +1,22 @@
+//@import '~common/styles/_theme.scss';
+
+.ui-btn {
+  outline: none;
+  background-color: #a885bf !important;
+  color: #ffffff !important;
+  border: none;
+  font-size: 1.8rem;
+  border-radius: 6px;
+
+  margin-bottom: 0;
+  vertical-align: middle;
+  font-weight: 400;
+  &.ui-xsmall {
+    font-size: 1.2rem;
+    margin: 0;
+  }
+  &.ui-block {
+    display: block;
+    width: 100%;
+  }
+}
