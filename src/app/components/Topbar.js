@@ -11,6 +11,9 @@ const navbar = [  {
 }, {
   title: 'deliveries',
   link: '/deliveries'
+}, {
+  title: 'logout',
+  link: '/logout'
 }]
 
 @translate()
@@ -44,7 +47,7 @@ export default class Topbar extends Component {
               </NavItem>
             )}
           </Nav>
-        </Navbar>        
+        </Navbar>
       </div>
     )
   }

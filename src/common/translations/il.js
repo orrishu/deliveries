@@ -13,7 +13,8 @@ export default {
   },
   nav: {
     code: 'מחסן',
-    deliveries: 'משלוחים'
+    deliveries: 'משלוחים',
+    logout: 'התנתקות'
   },
   code: {
     title: 'מחסן',

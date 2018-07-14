@@ -5,7 +5,7 @@ import Button from 'common/components/Button'
 import { inject, observer } from 'mobx-react'
 import { observable /*, toJS*/ } from 'mobx'
 import { translate } from 'react-polyglot'
-import { accountStore } from 'stores'
+//import { accountStore } from 'stores'
 
 import { whenRouted } from 'common/utils/withRouteHooks'
 import { withRouter } from 'react-router'
@@ -15,10 +15,11 @@ import styles from './style.scss'
 @withRouter
 @whenRouted(() => {
   //console.log(toJS(accountStore.profile))
-  accountStore.logout()
+  //accountStore.logout()
   })
 @translate()
 @inject('accountStore')
+@inject('routingStore')
 @CSSModules(styles)
 @observer
 export default class Login extends React.Component {
@@ -26,8 +27,16 @@ export default class Login extends React.Component {
   @observable password = ''
   @observable pending = false
 
+  componentWillMount() {
+    const { accountStore, routingStore: {push} } = this.props
+    if (accountStore.profile) {
+      console.log('logged')
+      push('/code')
+    }
+  }
+
   render() {
-    const { t } = this.props
+    const { accountStore, t } = this.props
     return (
       <section id="login-page" styleName="login-page">
         <form styleName="login-form" onSubmit={this.onLogin}>
@@ -63,6 +72,9 @@ export default class Login extends React.Component {
               <h4>{t('login.pleaseWait')}</h4>
             </div>
           }
+          {accountStore.error != null && accountStore.profile == null &&
+            <div styleName="login-error">{accountStore.errorMessage}</div>
+          }
         </form>
       </section>
     )
@@ -77,14 +89,18 @@ export default class Login extends React.Component {
   }
 
   onLogin = e => {
-    const { accountStore, match: { params: { from } } } = this.props
+    //const { accountStore, match: { params: { from } } } = this.props
+    const { accountStore } = this.props
     e.preventDefault()
     //login with parameter of 'from', for redirect
     this.pending = true
-    accountStore.login({
-      username: this.username,
-      password: this.password,
-      from
-    }).then(() => this.pending = false)
+    accountStore.login(this.username, this.password, true)
+      .then(() => {
+        this.pending = false
+        if (accountStore.profile) {
+          const { routingStore: { push } } = this.props
+          push('/code')
+        }
+      })
   }
 }

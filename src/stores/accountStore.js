@@ -9,6 +9,7 @@ class Account {
   @observable errorMessage = null
 
   constructor() {
+    console.log('store constructor')
     this.loadProfile()
   }
 
@@ -17,12 +18,12 @@ class Account {
     //this.me = await me()
     me().then(profile => {
       this.profile = profile
-      //console.log('Me', this.profile)
+      console.log('Me', this.profile)
     })
   }
 
   @action.bound
-  async login(userName, password, rememberMe) {    
+  async login(userName, password, rememberMe) {
     try {
       this.error = null
       this.errorMessage = null
