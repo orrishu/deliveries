@@ -11,7 +11,8 @@ import CSSModules from 'react-css-modules'
 import styles from './deliveries.scss'
 
 @translate()
-@inject('translationsStore')
+//@inject('translationsStore')
+@inject('accountStore')
 @inject('deliveriesStore')
 @CSSModules(styles)
 @observer
@@ -19,10 +20,12 @@ export default class Deliveries extends Component {
 
   componentWillMount() {
     console.log('deliveries component')
-    const {deliveriesStore} = this.props
-    deliveriesStore.loadDeliveries()
-    deliveriesStore.loadEmployees()
-    deliveriesStore.loadStatuses()
+    const {accountStore, deliveriesStore} = this.props
+    if (accountStore.profile) {
+      deliveriesStore.loadDeliveries()
+      deliveriesStore.loadEmployees()
+      deliveriesStore.loadStatuses()
+    }
   }
 
   onFilter = (field, value) => {
@@ -43,7 +46,7 @@ export default class Deliveries extends Component {
   }
 
   render() {
-    const {deliveriesStore, t} = this.props
+    const {accountStore, deliveriesStore, t} = this.props
 
     return (
       <div className="container theme-showcase">
@@ -55,6 +58,7 @@ export default class Deliveries extends Component {
         </Jumbotron>
         <Filters />
         <Grid styleName="show-grid" style={{paddingTop: '45px'}}>
+          {accountStore.profile &&
           <Row className="show-grid" styleName="head-row">
             <Col xs={1} md={1}>
 
@@ -191,14 +195,22 @@ export default class Deliveries extends Component {
             {/*<Col xs={1} md={1}>
               <div>{t('deliveries.collect')}</div>
             </Col>*/}
-          </Row>
-          <div>
-            <List
-              store={deliveriesStore}
-              loadMore={deliveriesStore.loadDeliveries}
-              onFilter={this.onFilter}
-            />
-          </div>
+          </Row>}
+          {accountStore.profile ?
+            <div>
+              <List
+                store={deliveriesStore}
+                loadMore={deliveriesStore.loadDeliveries}
+                onFilter={this.onFilter}
+              />
+            </div>
+            :
+            <Row>
+              <Col xs={24} md={24}>
+                {t('login.pleaseLog')}
+              </Col>
+            </Row>
+          }
         </Grid>
       </div>
     )
