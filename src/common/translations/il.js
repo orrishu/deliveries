@@ -4,6 +4,7 @@ export default {
   AppTitle: 'בלדר',
   login: {
     pleaseLog: 'יש להתחבר למערכת',
+    title: 'התחברות למערכת',
     usernameLabel: 'שם משתמש',
     passwordLabel: 'סיסמה',
     rememberMe: 'זכור לפעם הבאה',

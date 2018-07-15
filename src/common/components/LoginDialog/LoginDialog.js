@@ -88,6 +88,10 @@ export default class LoginDialog extends React.Component {
           <Grid>
             <Row>
               <Col xs={6} md={6}>
+                <h3 styleName="login-title">{t('login.title')}</h3>
+                {accountStore.error != null && accountStore.profile == null &&
+                  <div styleName="error_box">{accountStore.errorMessage}</div>
+                }
                 <form>
                   <FormGroup
                     controlId="userName"
