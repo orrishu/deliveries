@@ -115,14 +115,14 @@ export default class DeliveryItem extends Component {
             <div>{delivery.MyOut}</div>
           </Col>
           <Col xs={1} md={1} style={{paddingRight: '4px'}} onDoubleClick={() => this.onDblClick('CityName_1', delivery.CityName_1)}>
-            <div><input
+            <div>{/*<input
               type="text"
               name="CityName_1"
               value={delivery.CityName_1}
               readOnly={true}
               onKeyDown={(e) => this.onKeyDown(e, 'CityName_1', delivery.CityName_1)}
               styleName="filter-input"
-            /></div>
+            />*/} {delivery.CityName_1}</div>
           </Col>
           <Col xs={1} md={1}>
             <div>{delivery.archOut}</div>

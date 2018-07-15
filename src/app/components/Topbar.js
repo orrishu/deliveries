@@ -8,13 +8,13 @@ import {observable} from 'mobx'
 import {clearCache} from 'common/services/apiService'
 import LoginDialog from 'common/components/LoginDialog'
 
-const navbar = [  {
+const navbar = [/*{
   title: 'code',
   link: '/code'
-}, {
-  title: 'deliveries',
-  link: '/deliveries'
-}]
+},*/{
+    title: 'deliveries',
+    link: '/deliveries'
+  }]
 
 @translate()
 //@inject('translationsStore')
