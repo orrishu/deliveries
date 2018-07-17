@@ -51,6 +51,11 @@
   zoom: 0;
 }
 
+.combo-container {
+  /*overflow: auto;*/
+  zoom: 0;
+}
+
 .combo-l {
   float: left;
   width: 70%;
@@ -60,6 +65,7 @@
 .combo-r {
   float: right;
   width: 30%;
+  margin-bottom: 7px;
 }
 
 .date-div {

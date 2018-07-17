@@ -235,7 +235,8 @@ export default class DeliveryItem extends Component {
                 delivery.WhereToWhere == 3 ? t('deliveries.get') : ''}</div>
             <div>{t('deliveries.vehicleType')}: {delivery.VehicleTypeID}</div>
             <div>{t('deliveries.update')}: {delivery.mysort2}</div>
-            <div styleName="clearfix"><span styleName="combo-r">{t('deliveries.extraCourier')}:</span>
+            <div styleName="combo-container">
+              <span styleName="combo-r">{t('deliveries.extraCourier')}:</span>
               <span styleName="combo-l">
                 <Select
                   className="search-select"

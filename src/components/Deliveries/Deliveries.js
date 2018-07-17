@@ -20,11 +20,22 @@ export default class Deliveries extends Component {
 
   componentWillMount() {
     console.log('deliveries component')
+    /*  //this caused a problem - profile is loaded after that event is triggered
     const {accountStore, deliveriesStore} = this.props
     if (accountStore.profile) {
       deliveriesStore.loadDeliveries()
       deliveriesStore.loadEmployees()
       deliveriesStore.loadStatuses()
+    }*/
+  }
+
+  componentWillReceiveProps(nextProps) {
+    //console.log('receive props', nextProps)
+    //use that here because this event is triggered after profile is loaded (accountStore prop changed)
+    const {accountStore, deliveriesStore} = this.props
+    if (accountStore.profile) {
+      if (deliveriesStore.employees.length == 0) deliveriesStore.loadEmployees()
+      if (deliveriesStore.statuses.length == 0) deliveriesStore.loadStatuses()
     }
   }
 
