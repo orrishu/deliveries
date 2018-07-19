@@ -81,6 +81,22 @@ export function createUrl(relUrl, searchParams = {}, isApi = true) {
   return url
 }
 
+export function clearCache() {
+  cache.clear()
+}
+
+export function me() {
+  return apiFetch('Account/Me')
+}
+
+export function login(userName, password, rememberMe) {
+  return apiFetch('Account/Login', {body: {userName, password, rememberMe}, method: 'POST' }, true)
+}
+
+export function logout() {
+  return apiFetch('Account/Logout', {}, true)
+}
+
 export async function getCodes() {
   return Promise.resolve(
     [

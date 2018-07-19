@@ -7,7 +7,8 @@ import CSSModules from 'react-css-modules'
 import styles from './code.scss'
 
 @translate()
-@inject('translationsStore')
+//@inject('translationsStore')
+@inject('accountStore')
 @inject('codeStore')
 @CSSModules(styles)
 @observer
@@ -17,8 +18,10 @@ export default class Code extends Component {
 
   componentWillMount() {
     //console.log('code component')
-    const {codeStore} = this.props
-    codeStore.loadCodes()
+    const {codeStore, accountStore} = this.props
+    if (accountStore.profile) {
+      codeStore.loadCodes()
+    }
   }
 
   getValidationState() {
@@ -53,7 +56,7 @@ export default class Code extends Component {
   }
 
   render() {
-    const {codeStore, t} = this.props
+    const {codeStore, accountStore, t} = this.props
     //console.log(toJS(codeStore.codes))
     return (
       <div className="container theme-showcase">
@@ -64,49 +67,62 @@ export default class Code extends Component {
           </p>
         </Jumbotron>
         <Grid>
-          <Row>
-            <Col xs={12} md={12}>
-              <form>
-                <FormGroup
-                  controlId="formBasicText"
-                  validationState={this.getValidationState()}
-                >
-                  <ControlLabel>{t('code.add')}</ControlLabel>
-                  <FormControl
-                    type="text"
-                    value={this.code}
-                    placeholder="Enter text"
-                    onChange={this.handleChange}
-                    onKeyDown={this.onKeyDown}
-                  />
-                  <FormControl.Feedback />
-                  <HelpBlock>Validation is based on string length.</HelpBlock>
-                </FormGroup>
-              </form>
-            </Col>
-            <Col xs={12} md={12}>
-            </Col>
-          </Row>
-        </Grid>
-        <hr />
-        <h3>{t('code.existing')}</h3>
-        <Grid styleName="show-grid">
-          {codeStore.codes.map((code, index) =>
-            <Row key={index} className="show-grid">
-              <Col xs={4} md={4}>
-                <code>{code.id}</code>
+          {accountStore.profile ?
+            <Row>
+              <Col xs={12} md={12}>
+                <form>
+                  <FormGroup
+                    controlId="formBasicText"
+                    validationState={this.getValidationState()}
+                  >
+                    <ControlLabel>{t('code.add')}</ControlLabel>
+                    <FormControl
+                      type="text"
+                      value={this.code}
+                      placeholder="Enter text"
+                      onChange={this.handleChange}
+                      onKeyDown={this.onKeyDown}
+                    />
+                    <FormControl.Feedback />
+                    <HelpBlock>Validation is based on string length.</HelpBlock>
+                  </FormGroup>
+                </form>
               </Col>
               <Col xs={12} md={12}>
-                <code>{code.code}</code>
               </Col>
-              <Col xs={4} md={4}>
-                <code>{code.count}</code>
+            </Row>
+            :
+            <Row>
+              <Col xs={12} md={12}>
+                {t('login.pleaseLog')}
               </Col>
-            </Row>)
+              <Col xs={12} md={12}>
+              </Col>
+            </Row>
           }
         </Grid>
-        <hr />
-        <Button bsStyle="primary" onClick={this.saveChanges}>{t('code.saveChanges')}</Button>
+        {accountStore.profile &&
+          <div>
+            <hr />
+            <h3>{t('code.existing')}</h3>
+            <Grid styleName="show-grid">
+              {codeStore.codes.map((code, index) =>
+                <Row key={index} className="show-grid">
+                  <Col xs={4} md={4}>
+                    <code>{code.id}</code>
+                  </Col>
+                  <Col xs={12} md={12}>
+                    <code>{code.code}</code>
+                  </Col>
+                  <Col xs={4} md={4}>
+                    <code>{code.count}</code>
+                  </Col>
+                </Row>)
+              }
+            </Grid>
+            <hr />
+            <Button bsStyle="primary" onClick={this.saveChanges}>{t('code.saveChanges')}</Button>
+          </div>}
       </div>
     )
   }

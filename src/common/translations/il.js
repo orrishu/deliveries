@@ -2,15 +2,19 @@ export default {
   page404: 'מצטערים, הקישור שגוי',
   loading: 'טוען...',
   AppTitle: 'בלדר',
-  loginPage: {
+  login: {
+    pleaseLog: 'יש להתחבר למערכת',
+    title: 'התחברות למערכת',
     usernameLabel: 'שם משתמש',
     passwordLabel: 'סיסמה',
-    loginBtnTitle: 'כניסה',
-    loginError: 'פרטי ההזדהות שהזנת שגויים, אנא נסה שנית.'
+    rememberMe: 'זכור לפעם הבאה',
+    login: 'התחבר'
   },
   nav: {
     code: 'מחסן',
-    deliveries: 'משלוחים'
+    deliveries: 'משלוחים',
+    pleaseLog: 'התחבר',
+    logout: 'התנתק'
   },
   code: {
     title: 'מחסן',
