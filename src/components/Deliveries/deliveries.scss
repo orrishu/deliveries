@@ -1,4 +1,17 @@
 //@import '~common/style/_theme.scss';
+.title-container {
+  position: relative;
+}
+
+.title {
+  padding-top: 11px;
+}
+.logo {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
 .show-grid [class^=col-] {
     padding-top: 10px;
     padding-bottom: 10px;
@@ -10,7 +23,7 @@
 }
 
 .head-row {
-  background-color: #fff0f0;
+  background-color: #f1f0f0 /*#fff0f0;*/
 }
 
 .head-col {
@@ -18,15 +31,13 @@
 }
 
 .row {
-  /*background-color: #eee;*/
-  background-color: rgba(201, 190, 218, 0.15);
-  /*cursor: pointer;*/
+  /*background-color: rgba(201, 190, 218, 0.15);*/
+  background-color: #fff;
 }
 
 .alt-row {
-  /*background-color: #eee;*/
-  background-color: rgba(161, 135, 226, 0.13);
-  /*cursor: pointer;*/
+  /*background-color: rgba(161, 135, 226, 0.13);*/
+  background-color: #fafafa;
 }
 
 .open-big {
@@ -80,17 +91,6 @@
   width: 15%;
 }
 
-/*
-.filter-div {
-  width: 190px;
-  padding: 10px;
-  border: silver solid 1px;
-  margin-bottom: 10px;
+.extra-details {
+  margin: 5px;
 }
-
-.filter-close {
-  cursor: pointer;
-  float: right;
-  padding-left: 13px;
-}
-*/

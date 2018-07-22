@@ -10,6 +10,9 @@ import {doFilter} from 'common/utils/filter'
 import CSSModules from 'react-css-modules'
 import styles from './deliveries.scss'
 
+const req = require.context('common/style/icons/', false)
+const logoSrc = req('./baldarLogo.jpg')
+
 @translate()
 //@inject('translationsStore')
 @inject('accountStore')
@@ -61,12 +64,16 @@ export default class Deliveries extends Component {
 
     return (
       <div className="container theme-showcase">
-        <Jumbotron>
+        {/*<Jumbotron>
           <h1>{t('deliveries.title')}</h1>
           <p>
             {t('deliveries.subtitle')}
           </p>
-        </Jumbotron>
+        </Jumbotron>*/}
+        <div styleName="title-container">
+          <h1 styleName="title">{t('deliveries.title')}</h1>
+          <span styleName="logo"><img src={logoSrc} width="225" height="65" /></span>
+        </div>
         <Filters />
         <Grid styleName="show-grid" style={{paddingTop: '45px'}}>
           {accountStore.profile &&
@@ -74,7 +81,7 @@ export default class Deliveries extends Component {
             <Col xs={1} md={1}>
 
             </Col>
-            <Col xs={2} md={2}>
+            <Col xs={1} md={1}>
               <div styleName="head-col" onClick={() => this.onSort('FinishtimeSenc')}>
                 {t('deliveries.finishTime')}
                 <SortIndicator
@@ -83,7 +90,7 @@ export default class Deliveries extends Component {
                 />
               </div>
             </Col>
-            <Col xs={2} md={2}>
+            <Col xs={1} md={1}>
               <div styleName="head-col" onClick={() => this.onSort('DeliveryTime')}>
                 {t('deliveries.deliveryTime')}
                 <SortIndicator
@@ -140,7 +147,7 @@ export default class Deliveries extends Component {
             {/*<Col xs={1} md={1}>
               <div>{t('deliveries.update')}</div>
             </Col>*/}
-            <Col xs={1} md={1}>
+            <Col xs={3} md={3}>
               <div styleName="head-col" onClick={() => this.onSort('CompanyNameGet')}>
                 {t('deliveries.to')}
                 <SortIndicator
@@ -149,7 +156,7 @@ export default class Deliveries extends Component {
                 />
               </div>
             </Col>
-            <Col xs={1} md={1}>
+            <Col xs={2} md={2}>
               <div styleName="head-col" onClick={() => this.onSort('Mydes')}>
                 {t('deliveries.toWhere')}
                 <SortIndicator
@@ -185,7 +192,7 @@ export default class Deliveries extends Component {
             <Col xs={2} md={2}>
               <div>{t('deliveries.status')}</div>
             </Col>
-            <Col xs={1} md={1}>
+            {/*<Col xs={1} md={1}>
               <div styleName="head-col" onClick={() => this.onSort('FinishTime')}>
                 {t('deliveries.endDeliveryTime')}
                 <SortIndicator
@@ -193,7 +200,7 @@ export default class Deliveries extends Component {
                   show={deliveriesStore.sortBy == 'FinishTime'}
                 />
               </div>
-            </Col>
+            </Col>*/}
             <Col xs={1} md={1}>
               <div styleName="head-col" onClick={() => this.onSort('UrgencysName')}>
                 {t('deliveries.urgency')}

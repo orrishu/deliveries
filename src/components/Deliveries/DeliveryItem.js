@@ -99,13 +99,13 @@ export default class DeliveryItem extends Component {
           <Col xs={1} md={1} onClick={this.openBig}>
             <div styleName="open-big">{this.isOpen ? '-' : '+'}</div>
           </Col>
-          <Col xs={2} md={2}>
+          <Col xs={1} md={1}>
             <div style={{direction: 'ltr'}}>{moment(delivery.FinishtimeSenc).format('HH:mm:ss')}</div>
           </Col>
-          <Col xs={2} md={2}>
+          <Col xs={1} md={1}>
             <div style={{direction: 'ltr'}}>{moment(delivery.DeliveryTime).format('HH:mm:ss')}</div>
           </Col>
-          <Col xs={2} md={2}onDoubleClick={() => this.onDblClick('CustomerName', delivery.CustomerName)}>
+          <Col xs={2} md={2} onDoubleClick={() => this.onDblClick('CustomerName', delivery.CustomerName)}>
             <div>{delivery.CustomerName}</div>
           </Col>
           <Col xs={2} md={2}>
@@ -130,10 +130,10 @@ export default class DeliveryItem extends Component {
           {/*<Col xs={1} md={1}>
             <div>{delivery.mysort2}</div>
           </Col>*/}
-          <Col xs={1} md={1}>
+          <Col xs={3} md={3}>
             <div>{delivery.CompanyNameGet}</div>
           </Col>
-          <Col xs={1} md={1}>
+          <Col xs={2} md={2}>
             <div>{delivery.Mydes}</div>
           </Col>
           <Col xs={1} md={1}>
@@ -208,9 +208,9 @@ export default class DeliveryItem extends Component {
               />
             </div>
           </Col>
-          <Col xs={1} md={1}>
+          {/*<Col xs={1} md={1}>
             <div>{moment(delivery.FinishTime).format('HH:mm:ss')}</div>
-          </Col>
+          </Col>*/}
           <Col xs={1} md={1}>
             <div>{delivery.UrgencysName}</div>
           </Col>
@@ -219,7 +219,7 @@ export default class DeliveryItem extends Component {
           </Col>*/}
 
         </Row>
-        <Row className="show-grid" style={show}>
+        <Row className="show-grid" styleName="extra-details" style={show}>
 
           <Col xs={8} md={8} styleName="details">
             <div>{t('deliveries.deliveryNumber')}: {delivery.CustomerDeliveryNo}</div>
