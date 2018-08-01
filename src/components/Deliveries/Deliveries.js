@@ -117,7 +117,7 @@ export default class Deliveries extends Component {
                 />
               </div>
             </Col>
-            <Col xs={1} md={1}>
+            {/*<Col xs={1} md={1}>
               <div styleName="head-col" onClick={() => this.onSort('MyOut')}>
                 {t('deliveries.fromWhere')}
                 <SortIndicator
@@ -125,7 +125,7 @@ export default class Deliveries extends Component {
                   show={deliveriesStore.sortBy == 'MyOut'}
                 />
               </div>
-            </Col>
+            </Col>*/}
             <Col xs={1} md={1}>
               <div styleName="head-col" onClick={() => this.onSort('CityName_1')}>
                 {t('deliveries.cityName')}
@@ -201,7 +201,7 @@ export default class Deliveries extends Component {
                 />
               </div>
             </Col>*/}
-            <Col xs={1} md={1}>
+            <Col xs={2} md={2}>
               <div styleName="head-col" onClick={() => this.onSort('UrgencysName')}>
                 {t('deliveries.urgency')}
                 <SortIndicator

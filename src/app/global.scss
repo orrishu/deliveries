@@ -14,3 +14,9 @@ html {
         outline: none;
     }
 }
+
+:global {
+  .Select-control {
+    border: none !important;
+  }
+}

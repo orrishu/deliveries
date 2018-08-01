@@ -5,6 +5,7 @@ import {inject, observer} from 'mobx-react'
 import {observable, toJS} from 'mobx'
 import {Grid, Row, Col, DropdownButton, MenuItem} from 'react-bootstrap'
 import Select from 'react-select'
+import ReactTooltip from 'react-tooltip'
 import moment from 'moment'
 import {setDeliveryEmployee, setDeliveryStatus} from 'common/services/apiService'
 import CSSModules from 'react-css-modules'
@@ -47,6 +48,15 @@ export default class DeliveryItem extends Component {
 
   openBig = () => {
     this.isOpen = !this.isOpen
+  }
+
+  cutString = (value, length) => {
+    if (value.length > length) {
+      return `${value.substring(0, length)}...`
+    }
+    else {
+      return value
+    }
   }
 
   onChange = (value, num, type) => {
@@ -109,11 +119,11 @@ export default class DeliveryItem extends Component {
             <div>{delivery.CustomerName}</div>
           </Col>
           <Col xs={2} md={2}>
-            <div>{delivery.CompanyNameLet}</div>
+            <Shortened value={this.cutString(delivery.CompanyNameLet, 15)}  tooltip={delivery.CompanyNameLet}/>
           </Col>
-          <Col xs={1} md={1}>
+          {/*<Col xs={1} md={1}>
             <div>{delivery.MyOut}</div>
-          </Col>
+          </Col>*/}
           <Col xs={1} md={1} style={{paddingRight: '4px'}} onDoubleClick={() => this.onDblClick('CityName_1', delivery.CityName_1)}>
             <div>{/*<input
               type="text"
@@ -131,7 +141,7 @@ export default class DeliveryItem extends Component {
             <div>{delivery.mysort2}</div>
           </Col>*/}
           <Col xs={3} md={3}>
-            <div>{delivery.CompanyNameGet}</div>
+            <Shortened value={this.cutString(delivery.CompanyNameGet, 15)} tooltip={delivery.CompanyNameGet} />
           </Col>
           <Col xs={2} md={2}>
             <div>{delivery.Mydes}</div>
@@ -211,7 +221,7 @@ export default class DeliveryItem extends Component {
           {/*<Col xs={1} md={1}>
             <div>{moment(delivery.FinishTime).format('HH:mm:ss')}</div>
           </Col>*/}
-          <Col xs={1} md={1}>
+          <Col xs={2} md={2}>
             <div>{delivery.UrgencysName}</div>
           </Col>
           {/*<Col xs={1} md={1} onClick={this.openBig}>
@@ -228,11 +238,13 @@ export default class DeliveryItem extends Component {
             <div>{t('deliveries.comments')}: {delivery.Comment}</div>
             <div>{t('deliveries.orderedBy')}: {delivery.ContactManName}</div>
             <div>{t('deliveries.userName')}: {delivery.UserName}</div>
+            <div>{t('deliveries.fromWhere')}: {delivery.MyOut}</div>
           </Col>
           <Col xs={8} md={8} styleName="details">
             <div>{t('deliveries.deliveryType')}: {delivery.WhereToWhere == 1 ? t('deliveries.transfer') :
               delivery.WhereToWhere == 2 ? t('deliveries.delivery') :
                 delivery.WhereToWhere == 3 ? t('deliveries.get') : ''}</div>
+            <div>{`${t('deliveries.from2')}: ${delivery.CompanyNameLet}, ${t('deliveries.to2')}: ${delivery.CompanyNameGet}`}</div>
             <div>{t('deliveries.vehicleType')}: {delivery.VehicleTypeID}</div>
             <div>{t('deliveries.update')}: {delivery.mysort2}</div>
             <div styleName="combo-container">
@@ -271,7 +283,10 @@ export default class DeliveryItem extends Component {
           </Col>
 
         </Row>
+        <ReactTooltip />
       </div>
     )
   }
 }
+
+const Shortened = ({value, tooltip}) => <div data-tip={tooltip}>{value}</div>

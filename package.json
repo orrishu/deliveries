@@ -6,7 +6,7 @@
   "scripts": {
     "__build": "webpack --progress --config webpack.config.js",
     "rebuild:watch": "concurrently \"lite-server --config bs-config.js\" \"npm run rebuild -- -- --watch\"",
-    "rebuild": "cross-env NODE_ENV=production ASSET_PATH=/ npm run __build",
+    "rebuild": "cross-env NODE_ENV=production ASSET_PATH=/Deliveries npm run __build",
     "rebuild:dev": "cross-env NODE_ENV=development npm run __build",
     "start": "cross-env NODE_ENV=development ASSET_PATH=/ node devServer.js --port 5020 --search-free-port",
     "lint": "eslint src",
@@ -99,6 +99,7 @@
     "react-select": "^1.2.1",
     "react-spinners": "^0.3.2",
     "react-tap-event-plugin": "^2.0.1",
+    "react-tooltip": "^3.6.1",
     "recompose": "^0.25.1",
     "uglifyjs-webpack-plugin": "^0.4.6",
     "whatwg-fetch": "^2.0.3"

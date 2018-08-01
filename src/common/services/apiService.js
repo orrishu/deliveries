@@ -2,16 +2,16 @@ import 'whatwg-fetch'
 import cache from 'common/utils/cache'
 //import {notifyMessage} from 'common/utils/notifications'
 
-//let apiBaseUrl
-//let baseUrl
-//if (process.env.NODE_ENV === 'development' || location.href.indexOf('iis-test/') > -1) {
-const apiBaseUrl = 'http://localhost:8020/Data/api'
-const baseUrl = 'http://localhost:8020/Data'
-//}
-//else {
-//  apiBaseUrl = 'http://www.tenders.co.il/Data/api'
-//  baseUrl = 'http://www.tenders.co.il/Data'
-//}
+let apiBaseUrl
+let baseUrl
+if (process.env.NODE_ENV === 'development' || location.href.indexOf('localhost:8020') > -1) {
+  apiBaseUrl = 'http://localhost:8020/Data/api'
+  baseUrl = 'http://localhost:8020/Data'
+}
+else {
+  apiBaseUrl = '//62.219.7.158/Deliveries/Data/api'
+  baseUrl = '//62.219.7.158/Deliveries/Data'
+}
 
 /// important notes for POST (added by ori):
 /// 1. need to create an equivalent object on javascript, to the api request parameter;
